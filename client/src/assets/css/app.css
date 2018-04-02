@@ -1,0 +1,35 @@
+/* Globals */
+
+h1 {
+  font-size: 2em;
+  margin: 10px;
+}
+
+.break {
+  display: inline-block;
+  width: 100%;
+}
+
+.container {
+  margin-top: 20px;
+}
+
+.main-container > .columns {
+  margin-top: 1%;
+}
+
+
+/* Header */
+
+.subtitle a {
+  font-size:  1em;
+  margin: 10px;
+}
+
+/* Footer  */
+
+footer {
+  /* position: absolute;
+  bottom: 0;
+  width: 100%; */
+}
