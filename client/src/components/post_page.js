@@ -25,7 +25,7 @@ class PostPage extends Component{
   }
 
   deletePost(){
-    axios.delete(`/posts/${this.state.post.id}`).then(resp => {
+    axios.delete(`/posts/${this.state.post.id}.json`).then(resp => {
       this.setState({...this.state, redirect: true})
     }).catch(err => {
       console.log(err)

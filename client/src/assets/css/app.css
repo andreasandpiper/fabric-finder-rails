@@ -11,7 +11,7 @@ h1 {
 }
 
 .container {
-  margin-top: 20px;
+  margin: 20px auto;
 }
 
 .main-container > .columns {
