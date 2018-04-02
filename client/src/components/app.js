@@ -11,12 +11,10 @@ import PostForm from './post_form';
 const App = () => (
     <div className="main-container">
         <Header />
-        <div className="columns">
             <Route exact path="/" component={Home}/>
             <Route path="/user/:id" component={Profile}/>
             <Route exact path="/post" component={PostForm} />
             <Route path="/post/:id" component={Post} />
-        </div>
         <Footer />
     </div>
 

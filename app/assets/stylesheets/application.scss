@@ -13,3 +13,12 @@
  *= require_tree .
  *= require_self
  */
+
+ @import "sass/utilities/initial-variables";
+ @import "sass/utilities/functions";
+
+ $navbar-background-color: $grey-darker;
+ $navbar-item-color: $white;
+ $navbar-item-hover-color: $turquoise;
+
+ @import "bulma";
