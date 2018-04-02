@@ -36,7 +36,7 @@ gem 'jbuilder', '~> 2.5'
 # ADDED GEMS 
 gem 'faker', '~> 1.8.7'
 gem 'rack-cors'
-
+gem 'devise'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
