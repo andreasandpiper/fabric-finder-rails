@@ -26,6 +26,12 @@ h1 {
   margin: 10px;
 }
 
+/* POSTS */
+
+.image img{
+  width: auto;
+  max-height: 100%;
+}
 /* Footer  */
 
 footer {
