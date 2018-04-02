@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Feed from './feed';
+import logged_in from '../HOC/user_status';
 
 class Profile extends Component {
   constructor(props){
@@ -8,12 +9,9 @@ class Profile extends Component {
   }
 
   componentWillMount(){
-    axios.get('/users').then(resp => {
-      console.log(resp)
-    }).catch(err => {
-      console.log(err)
-    })
+    this.props.is_logged_in();
   }
+
   
   render () {
     // const { name, email } = this.props.user.current_user; 
@@ -46,4 +44,4 @@ class Profile extends Component {
   }
 }
 
-export default Profile; 
+export default logged_in(Profile); 

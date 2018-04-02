@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
+import logged_in from '../HOC/user_status';
+
 
 class PostForm extends Component{
   constructor(props){
@@ -9,6 +11,10 @@ class PostForm extends Component{
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+  }
+
+  componentDidMount(){
+    this.props.is_logged_in();
   }
 
 
@@ -66,4 +72,4 @@ class PostForm extends Component{
   }
 }
 
-export default PostForm;
+export default logged_in(PostForm);
