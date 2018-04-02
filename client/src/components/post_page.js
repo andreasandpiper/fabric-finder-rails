@@ -17,7 +17,6 @@ class PostPage extends Component{
 
   componentDidMount(){    
     axios.get(`/posts/${this.props.match.params.id}.json`).then(resp => {
-      console.log(resp)
       this.setState({...this.state, post: resp.data})
     }).catch(err => {
       console.log(err)
@@ -26,7 +25,7 @@ class PostPage extends Component{
 
   deletePost(){
     axios.delete(`/posts/${this.state.post.id}.json`).then(resp => {
-      this.setState({...this.state, redirect: true})
+      this.props.history.push('/');
     }).catch(err => {
       console.log(err)
     })

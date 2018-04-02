@@ -19,7 +19,11 @@ class PostsController < ApplicationController
 
   def destroy 
     post = Post.find(params[:id])
-    return post.destroy
+    if current_user.id == post.user_id
+      return post.destroy
+    else 
+      return head :unauthorized
+    end
   end 
 
   private 
