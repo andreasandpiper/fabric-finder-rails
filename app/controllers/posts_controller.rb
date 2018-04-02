@@ -13,7 +13,8 @@ class PostsController < ApplicationController
 
   def show 
     post = Post.find(params[:id])
-    render json: post
+    data = { :signed_in => user_signed_in?, :post => post }
+    render json: data
   end 
 
   def destroy 
@@ -26,4 +27,5 @@ class PostsController < ApplicationController
   def post_params 
     params.require(post_data).permit(:image, :description)
   end
+
 end

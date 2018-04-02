@@ -8,7 +8,8 @@ class PostPage extends Component{
 
     this.state = {
       post: {},
-      redirect: false
+      redirect: false,
+      signed_in: false
     }
 
     this.deletePost = this.deletePost.bind(this);
@@ -16,7 +17,8 @@ class PostPage extends Component{
 
   componentDidMount(){    
     axios.get(`/posts/${this.props.match.params.id}.json`).then(resp => {
-      this.setState({...this.state, post: resp.data})
+      console.log(resp)
+      this.setState({...this.state, post: resp.data.post, signed_in: resp.data.signed_in})
     }).catch(err => {
       console.log(err)
     })
@@ -31,11 +33,17 @@ class PostPage extends Component{
   }
 
   render(){
+    let deleteBtn = null; 
     if(this.state.redirect){
       return <Redirect to='/'/>
     }
     const { created_at, description, image, user_name, id } = this.state.post; 
     const delete_route = "/posts/" + id; 
+
+    if(this.state.signed_in){
+      deleteBtn = <p className="button is-danger is-outlined" onClick={this.deletePost}>Delete</p>
+    }
+
     return (
       <div className="container">
         <div className="columns">
@@ -46,7 +54,7 @@ class PostPage extends Component{
             <p>{ description }</p>
           </div>
           <div className="has-text-right">
-            <p className="button is-danger is-outlined" onClick={this.deletePost}>Delete</p>
+            { deleteBtn }
           </div>
         </div>
       </div>
