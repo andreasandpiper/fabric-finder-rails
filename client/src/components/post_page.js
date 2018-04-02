@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 
 class PostPage extends Component{
@@ -6,21 +7,35 @@ class PostPage extends Component{
     super(props);
 
     this.state = {
-      post: {}
+      post: {},
+      redirect: false
     }
+
+    this.deletePost = this.deletePost.bind(this);
   }
 
   componentDidMount(){    
     axios.get(`/posts/${this.props.match.params.id}.json`).then(resp => {
-      this.setState({post: resp.data})
-      console.log(resp)
+      this.setState({...this.state, post: resp.data})
+    }).catch(err => {
+      console.log(err)
+    })
+  }
+
+  deletePost(){
+    axios.delete(`/posts/${this.state.post.id}`).then(resp => {
+      this.setState({...this.state, redirect: true})
     }).catch(err => {
       console.log(err)
     })
   }
 
   render(){
-    const { created_at, description, image, user_name } = this.state.post; 
+    if(this.state.redirect){
+      return <Redirect to='/'/>
+    }
+    const { created_at, description, image, user_name, id } = this.state.post; 
+    const delete_route = "/posts/" + id; 
     return (
       <div className="container">
         <div className="columns">
@@ -29,6 +44,9 @@ class PostPage extends Component{
           </div>
           <div className="column">
             <p>{ description }</p>
+          </div>
+          <div className="has-text-right">
+            <p className="button is-danger is-outlined" onClick={this.deletePost}>Delete</p>
           </div>
         </div>
       </div>
