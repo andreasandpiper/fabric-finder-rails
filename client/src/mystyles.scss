@@ -1,0 +1,10 @@
+@import "bulma/sass/utilities/initial-variables";
+@import "bulma/sass/utilities/functions";
+
+$navbar-background-color: $grey-darker;
+$navbar-item-color: $white;
+$navbar-item-hover-color: $turquoise;
+
+@import "bulma/bulma.sass";
+
+
