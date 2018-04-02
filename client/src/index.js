@@ -12,15 +12,20 @@ axios.interceptors.response.use(function (response) {
   }, function (error) {
     if(error.status === 401){
         localStorage.setItem("logged_in", false);
+        localStorage.removeItem("user_id");
         window.location.href = '/users/sign_in';
     }
     return Promise.reject(error);
   });
 
 axios.get("/profile").then(resp => {
-    localStorage.setItem("logged_in", true)
+    console.log(resp)
+    localStorage.setItem("logged_in", true);
+    localStorage.setItem("user_id", resp.data.id);
+
 }).catch(err => {
-    localStorage.setItem("logged_in", false)
+    localStorage.setItem("logged_in", false);
+    localStorage.removeItem("user_id");
 })
 
 

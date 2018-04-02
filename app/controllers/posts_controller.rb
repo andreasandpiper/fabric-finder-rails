@@ -14,8 +14,7 @@ class PostsController < ApplicationController
 
   def show 
     post = Post.find(params[:id])
-    data = { :signed_in => user_signed_in?, :post => post }
-    render json: data
+    render json: post
   end 
 
   def destroy 

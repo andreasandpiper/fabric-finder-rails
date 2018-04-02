@@ -9,7 +9,7 @@ class PostPage extends Component{
     this.state = {
       post: {},
       redirect: false,
-      signed_in: false
+      user_id: localStorage.getItem("user_id")
     }
 
     this.deletePost = this.deletePost.bind(this);
@@ -18,7 +18,7 @@ class PostPage extends Component{
   componentDidMount(){    
     axios.get(`/posts/${this.props.match.params.id}.json`).then(resp => {
       console.log(resp)
-      this.setState({...this.state, post: resp.data.post, signed_in: resp.data.signed_in})
+      this.setState({...this.state, post: resp.data})
     }).catch(err => {
       console.log(err)
     })
@@ -34,13 +34,13 @@ class PostPage extends Component{
 
   render(){
     let deleteBtn = null; 
-    if(this.state.redirect){
+    if(!this.state.user_id){
       return <Redirect to='/'/>
     }
-    const { created_at, description, image, user_name, id } = this.state.post; 
+    const { created_at, description, image, user_name, id, user_id } = this.state.post; 
     const delete_route = "/posts/" + id; 
 
-    if(this.state.signed_in){
+    if(this.state.user_id == user_id){
       deleteBtn = <p className="button is-danger is-outlined" onClick={this.deletePost}>Delete</p>
     }
 
