@@ -6,15 +6,29 @@ import logged_in from '../HOC/user_status';
 class Profile extends Component {
   constructor(props){
     super(props);
+
+  this.state = {
+    user: {},
+    posts: []
+  }
   }
 
   componentWillMount(){
     this.props.is_logged_in();
+
+    const id = localStorage.getItem("user_id"); 
+
+    axios.get(`profile/${id}`).then(resp => {
+      console.log(resp);
+      this.setState({user: resp.data.user, posts: resp.data.posts})
+    }).catch(err => {
+      console.log(err)
+    })
   }
 
   
   render () {
-    // const { name, email } = this.props.user.current_user; 
+    const { email } = this.state.user; 
 
     return (
       <div className="container">
@@ -29,14 +43,14 @@ class Profile extends Component {
           <div className="card-content">
             <div className="media">
               <div className="media-content">
-                {/* <p className="title is-4">{ name } </p> */}
+                <p className="title is-4">{ email } </p>
               </div>
             </div>
           </div>
         </div>
           </div>
-          <div className="column">
-          {/* <Feed data={this.props.user.user_posts} /> */}
+          <div className="column is-three-quarters">
+            <Feed data={this.state.posts} />
           </div>
         </div>
       </div>

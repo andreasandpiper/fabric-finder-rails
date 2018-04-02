@@ -8,4 +8,10 @@ class ProfileController < ApplicationController
     end 
   end
 
+  def show
+    user = User.find(params[:id])
+    posts = user.posts
+    render json: { user: user, posts: posts}
+  end 
+
 end

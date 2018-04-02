@@ -35,7 +35,9 @@ class Home extends Component {
           </div>
         </div>
       </section>
-      <Feed data={this.state.posts} />
+      <div className= "container">
+        <Feed data={this.state.posts} />
+      </div>
     </div>
     )
   }

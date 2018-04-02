@@ -24,7 +24,7 @@ export default (props) => {
         <div className="media-left">
           <figure className="image is-128x128">
             <img src={image} alt="Image"/>
-            <Link to={`post/${id}`}>
+            <Link to={`/post/${id}`}>
               <p className="has-text-centered">View Post</p>
             </Link>
           </figure>
