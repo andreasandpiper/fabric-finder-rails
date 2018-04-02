@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import Feed from './feed';
 
 class Profile extends Component {
@@ -7,6 +8,11 @@ class Profile extends Component {
   }
 
   componentWillMount(){
+    axios.get('/users').then(resp => {
+      console.log(resp)
+    }).catch(err => {
+      console.log(err)
+    })
   }
   
   render () {
