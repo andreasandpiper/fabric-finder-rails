@@ -8,7 +8,7 @@ class PostsController < ApplicationController
 
   def create 
     post_data = JSON.parse params[:data]
-    post = Post.create(post_data)
+    post = current_user.posts.create(post_data)
     render json: post
   end 
 
