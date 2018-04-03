@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
-import Comment from './comment';
+import CommentForm from './comment_form';
 import axios from 'axios';
 
 class PostPage extends Component{
@@ -54,7 +54,7 @@ class PostPage extends Component{
           </div>
           <div className="column">
             <p>{ description }</p>
-            <Comment post_id={this.state.post.id}/>
+            <CommentForm post_id={this.state.post.id}/>
 
           </div>
           <div className="has-text-right">
