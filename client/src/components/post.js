@@ -6,6 +6,7 @@ import caretup from  '@fortawesome/fontawesome-free-solid/faCaretUp';
 import caretdown from  '@fortawesome/fontawesome-free-solid/faCaretDown';
 
 export default (props) => {
+  console.log(props)
   const { description, image, created_at, id } = props.post;
 
   function getTimeElapsed(date){
