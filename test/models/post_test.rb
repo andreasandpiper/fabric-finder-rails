@@ -5,10 +5,6 @@ class PostTest < ActiveSupport::TestCase
     @post = posts(:one)
   end 
 
-  test "post should be valid" do 
-    assert @post.valid?
-  end 
-
   test "post image should be present" do 
     @post.image = ''
     assert_not @post.valid?
