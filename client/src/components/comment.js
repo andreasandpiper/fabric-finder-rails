@@ -20,7 +20,14 @@ class Comment extends Component{
 
   handleSubmit(event){
     event.preventDefault();
-    console.log(this.state);
+
+    const data = { data: this.state }
+
+    axios.post('/comments', data).then(resp => {
+      console.log(resp)
+    }).catch(err => {
+      console.log(err)
+    })
   }
 
   handleChange(event){
