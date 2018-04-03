@@ -2,10 +2,10 @@
 
 one:
   post_id: 1
-  content: MyString
+  content: "Wubba lubba dub dub!"
   author_id: 1
 
 two:
   post_id: 1
-  content: MyString
-  author_id: 1
+  content: "Spice girls world tour!"
+  author_id: 2

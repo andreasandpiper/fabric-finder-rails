@@ -1,9 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  image: MyString
-  description: MyText
+  image: "https://kawaii.kawaii.at/img/beige-fabric-bird-flower-butterfly-Robert-Kaufman-165032-2.jpg"
+  description: "bird fabric"
 
 two:
-  image: MyString
-  description: MyText
+  image: "https://kawaii.kawaii.at/img/beige-fabric-bird-flower-butterfly-Robert-Kaufman-165032-2.jpg"
+  description: "some more bird fabric"
