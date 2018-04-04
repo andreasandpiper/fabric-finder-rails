@@ -39,14 +39,16 @@ class Comment extends Component{
     })
   }
 
-  upvoteComment(){
-    axios.post(`/comments/${this.state.comment.id}/upvote`).then(resp => {
+  vote(type){
+    axios.post(`/comments/${this.state.comment.id}/${type}`).then(resp => {
       console.log(resp)
       this.calculateVotes(resp.data.votes)
     }).catch(err => {
       console.log(err)
     })
   }
+
+
 
   render(){
 
@@ -61,9 +63,9 @@ class Comment extends Component{
       <div className="box">
         <article className="media">
           <div className="media-left">
-            <FontAwesomeIcon icon={caretup} className="vote" onClick={this.upvoteComment.bind(this)} />
+            <FontAwesomeIcon icon={caretup} className="vote" onClick={this.vote.bind(this, "upvote")} />
             <span className="break"><p>{ this.state.votes_difference }</p></span>
-            <FontAwesomeIcon icon={caretdown} className="vote"/>
+            <FontAwesomeIcon icon={caretdown} className="vote" onClick={this.vote.bind(this, "downvote")}/>
 
           </div>
           <div className="media-content">
