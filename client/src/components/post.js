@@ -15,12 +15,6 @@ export default (props) => {
     <div className="box">
       <article className="media">
         <div className="media-left">
-          <FontAwesomeIcon icon={caretup} />
-          <span className="break"></span>
-          <FontAwesomeIcon icon={caretdown} />
-
-        </div>
-        <div className="media-left">
           <figure className="image is-128x128">
             <img src={image} alt="Image"/>
             <Link to={`/post/${id}`}>

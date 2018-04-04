@@ -40,7 +40,7 @@ class Comment extends Component{
   }
 
   vote(type){
-    axios.post(`/comments/${this.state.comment.id}/${type}`).then(resp => {
+    axios.post(`/comments/${this.state.comment.id}/${type}.json`).then(resp => {
       console.log(resp)
       this.calculateVotes(resp.data.votes)
     }).catch(err => {
