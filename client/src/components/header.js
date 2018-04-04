@@ -10,6 +10,8 @@ class Header extends Component{
     this.state = {
       user_id: localStorage.getItem("user_id")
     }
+
+    this.logout = this.logout.bind(this);
   }
 
 
@@ -23,6 +25,9 @@ class Header extends Component{
     })
   }
 
+  logout(){
+    localStorage.removeItem("user_id");
+  }
 
   render (){
     if(this.state.user_id){
@@ -41,7 +46,7 @@ class Header extends Component{
                 <div className="navbar-end">
                   <Link to="/user/1" className="navbar-item">Profile</Link>
                   <Link to="/post" className="navbar-item">Post</Link>
-                  <a href="/users/sign_out" className="navbar-item">Logout</a>  
+                  <a href="/users/sign_out" onClick={this.logout} className="navbar-item">Logout</a>  
                 </div>
               </div>
             </nav>
