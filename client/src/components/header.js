@@ -10,8 +10,6 @@ class Header extends Component{
     this.state = {
       user_id: localStorage.getItem("user_id")
     }
-
-    this.logoutUser = this.logoutUser.bind(this);
   }
 
 
@@ -25,14 +23,6 @@ class Header extends Component{
     })
   }
 
-  logoutUser(){
-    axios.get('/users/sign_out').then(resp => {
-      localStorage.removeItem("user_id");
-      this.setState({user_id: null})
-    }).catch(err => {
-      console.log(err)
-    })
-  }
 
   render (){
     if(this.state.user_id){
@@ -51,8 +41,7 @@ class Header extends Component{
                 <div className="navbar-end">
                   <Link to="/user/1" className="navbar-item">Profile</Link>
                   <Link to="/post" className="navbar-item">Post</Link>
-                  <p href="/users/sign_out" className="navbar-item logout" onClick={this.logoutUser}>Logout</p>
-  
+                  <a href="/users/sign_out" className="navbar-item">Logout</a>  
                 </div>
               </div>
             </nav>
