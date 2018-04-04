@@ -3,7 +3,8 @@ require 'test_helper'
 class CommentTest < ActiveSupport::TestCase
   
   def setup 
-    @comment = comments(:one)
+    @post = posts(:one)
+    @comment = @post.comments.build(content: "hello")
   end
 
   test "comment should be valid" do
