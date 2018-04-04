@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: [:create, :destroy]
 
   def create
     comment_params
@@ -7,6 +7,20 @@ class CommentsController < ApplicationController
     comment = post.comments.create(author_id: current_user.id, content: comment_params[:content])
     render json: comment
   end 
+
+  def destroy 
+    comment = Comment.find(params[:id])
+    if current_user.id == comment.author_id
+      return comment.destroy
+    else 
+      return head :unauthorized
+    end
+  end
+
+  def get_comments
+    post = Post.find(params[:id])
+    render json: post.comments
+  end
 
   private
 

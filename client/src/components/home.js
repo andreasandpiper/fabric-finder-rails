@@ -20,7 +20,6 @@ class Home extends Component {
   }
 
   render(){
-    console.log(this.props.posts)
     return (
       <div>
       <section className="hero is-primary">

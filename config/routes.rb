@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   resources :users
   resources :profile
   resources :comments
+  get '/post/:id/comments', to: 'comments#get_comments'
 end

@@ -11,29 +11,15 @@ class PostPage extends Component{
     this.state = {
       post: {},
       redirect: false,
-      user_id: localStorage.getItem("user_id"),
-      comments: []
+      user_id: localStorage.getItem("user_id")
     }
 
     this.deletePost = this.deletePost.bind(this);
-    this.updateComments = this.updateComments.bind(this);
   }
 
   componentDidMount(){    
-    this.getPostInfo();
-  }
-
-  getPostInfo(){
     axios.get(`/posts/${this.props.match.params.id}.json`).then(resp => {
-      console.log(resp)
-      const post = {
-        created_at: resp.data.created_at,
-        description: resp.data.description,
-        id: resp.data.id,
-        image: resp.data.image,
-        user_id: resp.data.user_id
-      }
-      this.setState({...this.state, post: post, comments: resp.data.comments})
+      this.setState({...this.state, post: resp.data})
     }).catch(err => {
       console.log(err)
     })
@@ -47,15 +33,10 @@ class PostPage extends Component{
     })
   }
 
-  updateComments(){
-    this.getPostInfo();
-  }
-
   render(){
+    console.log(this.state)
     let deleteBtn = null; 
-    if(!this.state.user_id){
-      return <Redirect to='/'/>
-    }
+
     const { created_at, description, image, user_name, id, user_id } = this.state.post; 
     const delete_route = "/posts/" + id; 
 
@@ -73,7 +54,7 @@ class PostPage extends Component{
             <p>{ description }</p>
             <hr/>
             <CommentForm post_id={this.state.post.id } submit={ this.updateComments }/>
-            <CommentFeed comments={ this.state.comments } />
+            <CommentFeed post_id={this.state.post.id }/>
           </div>
           <div className="has-text-right">
             { deleteBtn }

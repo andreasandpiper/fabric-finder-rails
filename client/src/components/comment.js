@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome/index'
 import caretup from  '@fortawesome/fontawesome-free-solid/faCaretUp';
 import caretdown from  '@fortawesome/fontawesome-free-solid/faCaretDown';
+import axios from 'axios';
 
 class Comment extends Component{
   constructor(props){
@@ -12,11 +13,14 @@ class Comment extends Component{
       user_id: localStorage.getItem("user_id")
     }
 
-    this.deleteComment = this.deleteComment.bind(this);
   }
 
   deleteComment(){
-    console.log("delete")
+    axios.delete(`/comments/${this.state.comment.id}.json`).then(resp => {
+      this.props.delete();
+    }).catch(err => {
+      console.log(err)
+    })
 
   }
 
