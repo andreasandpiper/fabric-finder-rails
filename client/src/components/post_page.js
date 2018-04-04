@@ -16,9 +16,14 @@ class PostPage extends Component{
     }
 
     this.deletePost = this.deletePost.bind(this);
+    this.updateComments = this.updateComments.bind(this);
   }
 
   componentDidMount(){    
+    this.getPostInfo();
+  }
+
+  getPostInfo(){
     axios.get(`/posts/${this.props.match.params.id}.json`).then(resp => {
       console.log(resp)
       const post = {
@@ -42,6 +47,10 @@ class PostPage extends Component{
     })
   }
 
+  updateComments(){
+    this.getPostInfo();
+  }
+
   render(){
     let deleteBtn = null; 
     if(!this.state.user_id){
@@ -54,7 +63,6 @@ class PostPage extends Component{
       deleteBtn = <p className="button is-danger is-outlined" onClick={this.deletePost}>Delete</p>
     }
 
-    console.log(this.state)
     return (
       <div className="container">
         <div className="columns">
@@ -64,7 +72,7 @@ class PostPage extends Component{
           <div className="column">
             <p>{ description }</p>
             <hr/>
-            <CommentForm submit={ this.updateComments }/>
+            <CommentForm post_id={this.state.post.id } submit={ this.updateComments }/>
             <CommentFeed comments={ this.state.comments } />
           </div>
           <div className="has-text-right">
