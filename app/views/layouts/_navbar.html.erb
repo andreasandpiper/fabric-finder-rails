@@ -1,18 +1,35 @@
-<nav class="navbar" role="navigation" aria-label="dropdown navigation">
-  <div class="navbar-brand">
-    <%= link_to "Home", "/app", :class => "navbar-item" %>
-    <div class="navbar-burger">
-      <span></span>
-      <span></span>
-      <span></span>
+<% if user_signed_in? %>
+  <nav class="navbar" role="navigation" aria-label="dropdown navigation">
+    <div class="navbar-brand">
+      <%= link_to "Home", "/app", :class => "navbar-item" %>
+      <div class="navbar-burger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
     </div>
-  </div>
-  <div class="navbar-menu">
-    <div class="navbar-end">
-      <%= link_to "Profile", "#", :class => "navbar-item" %>
-      <%= link_to "Post", "/app/#/post", :class => "navbar-item" %>
-      <%= link_to "Login", user_session_path, :class => "navbar-item" %>
-      <%= link_to "Logout", destroy_user_session_path, :class => "navbar-item" %>
+    <div class="navbar-menu">
+      <div class="navbar-end">
+        <%= link_to "Profile", "/app/#/user/#{current_user.id}", :class => "navbar-item" %>
+        <%= link_to "Post", "/app/#/post", :class => "navbar-item" %>
+        <%= link_to "Logout", destroy_user_session_path, :class => "navbar-item" %>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
+<% else %>
+  <nav class="navbar" role="navigation" aria-label="dropdown navigation">
+    <div class="navbar-brand">
+      <%= link_to "Home", "/app", :class => "navbar-item" %>
+      <div class="navbar-burger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+    <div class="navbar-menu">
+      <div class="navbar-end">
+        <%= link_to "Login", user_session_path, :class => "navbar-item" %>
+      </div>
+    </div>
+  </nav>
+<% end %>

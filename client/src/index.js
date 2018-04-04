@@ -17,14 +17,13 @@ axios.interceptors.response.use(function (response) {
     return Promise.reject(error);
   });
 
-// Create into component?
-axios.get("/profile").then(resp => {
-    console.log(resp)
-    localStorage.setItem("user_id", resp.data.id);
+// axios.get("/profile").then(resp => {
+//     console.log(resp)
+//     localStorage.setItem("user_id", resp.data.id);
 
-}).catch(err => {
-    localStorage.removeItem("user_id");
-})
+// }).catch(err => {
+//     localStorage.removeItem("user_id");
+// })
 
 
 ReactDOM.render(

@@ -26,6 +26,12 @@ h1 {
   margin: 10px;
 }
 
+.logout:hover {
+  cursor: pointer;
+  background-color: whitesmoke;
+  color: #00d1b2;
+}
+
 /* POSTS */
 
 .image img{

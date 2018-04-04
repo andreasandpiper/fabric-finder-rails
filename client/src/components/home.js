@@ -22,18 +22,6 @@ class Home extends Component {
   render(){
     return (
       <div>
-      <section className="hero is-primary">
-        <div className="hero-body">
-          <div className="container has-text-centered">
-            <h1 className="title">
-              Find My Fabric
-            </h1>
-            <h2 className="subtitle">
-              <a href="/users/sign_up" className="button is-white">Sign Up</a> 
-            </h2>
-          </div>
-        </div>
-      </section>
       <div className= "container">
         <Feed data={this.state.posts} />
       </div>
