@@ -16,6 +16,21 @@ class Comment extends Component{
 
   }
 
+  componentDidMount(){
+    this.calculateVotes(this.state.comment.votes);
+  }
+
+  calculateVotes(votes){
+    let upvoteCount = votes.reduce( (total, vote) => {
+      if(vote.vote_type){
+        return total+= 1;
+      } else {
+        return total-= 1;
+      }
+    }, 0);
+    this.setState({...this.state, votes_difference: upvoteCount})
+  }
+
   deleteComment(){
     axios.delete(`/comments/${this.state.comment.id}.json`).then(resp => {
       this.props.delete();
@@ -27,13 +42,14 @@ class Comment extends Component{
   upvoteComment(){
     axios.post(`/comments/${this.state.comment.id}/upvote`).then(resp => {
       console.log(resp)
-      //reload the comment
+      this.calculateVotes(resp.data.votes)
     }).catch(err => {
       console.log(err)
     })
   }
 
   render(){
+
     let deleteBtn = null; 
     const { content, created_at } = this.state.comment;
 
