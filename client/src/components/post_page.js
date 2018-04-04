@@ -36,12 +36,17 @@ class PostPage extends Component{
   render(){
     console.log(this.state)
     let deleteBtn = null; 
+    let commentsForm = null; 
 
     const { created_at, description, image, user_name, id, user_id } = this.state.post; 
     const delete_route = "/posts/" + id; 
 
     if(this.state.user_id == user_id){
       deleteBtn = <p className="button is-danger is-outlined" onClick={this.deletePost}>Delete</p>
+    }
+
+    if(this.state.user_id){
+      commentsForm = <CommentForm post_id={this.state.post.id } submit={ this.updateComments }/>
     }
 
     return (
@@ -53,7 +58,7 @@ class PostPage extends Component{
           <div className="column">
             <p>{ description }</p>
             <hr/>
-            <CommentForm post_id={this.state.post.id } submit={ this.updateComments }/>
+            { commentsForm }
             <CommentFeed post_id={this.state.post.id }/>
           </div>
           <div className="has-text-right">
