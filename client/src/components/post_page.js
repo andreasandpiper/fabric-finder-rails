@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
-import CommentForm from './comment_form';
 import CommentFeed from './comment_feed';
 import axios from 'axios';
 
@@ -34,9 +33,7 @@ class PostPage extends Component{
   }
 
   render(){
-    console.log(this.state)
     let deleteBtn = null; 
-    let commentsForm = null; 
 
     const { created_at, description, image, user_name, id, user_id } = this.state.post; 
     const delete_route = "/posts/" + id; 
@@ -45,9 +42,7 @@ class PostPage extends Component{
       deleteBtn = <p className="button is-danger is-outlined" onClick={this.deletePost}>Delete</p>
     }
 
-    if(this.state.user_id){
-      commentsForm = <CommentForm post_id={this.state.post.id } submit={ this.updateComments }/>
-    }
+
 
     return (
       <div className="container">
@@ -58,7 +53,6 @@ class PostPage extends Component{
           <div className="column">
             <p>{ description }</p>
             <hr/>
-            { commentsForm }
             <CommentFeed post_id={this.state.post.id }/>
           </div>
           <div className="has-text-right">

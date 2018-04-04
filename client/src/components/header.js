@@ -3,6 +3,13 @@ import { Link} from 'react-router-dom';
 
 
 class Header extends Component{
+  constructor(props){
+    super(props)
+
+    this.state = {
+      user_id: localStorage.getItem("user_id")
+    }
+  }
 
   render (){
     return (

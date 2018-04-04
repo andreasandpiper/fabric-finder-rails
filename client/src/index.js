@@ -11,7 +11,6 @@ axios.interceptors.response.use(function (response) {
     return response;
   }, function (error) {
     if(error.status === 401){
-        localStorage.setItem("logged_in", false);
         localStorage.removeItem("user_id");
         window.location.href = '/users/sign_in';
     }
@@ -21,11 +20,9 @@ axios.interceptors.response.use(function (response) {
 // Create into component?
 axios.get("/profile").then(resp => {
     console.log(resp)
-    localStorage.setItem("logged_in", true);
     localStorage.setItem("user_id", resp.data.id);
 
 }).catch(err => {
-    localStorage.setItem("logged_in", false);
     localStorage.removeItem("user_id");
 })
 

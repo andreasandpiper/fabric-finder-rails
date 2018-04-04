@@ -33,7 +33,7 @@ class CommentForm extends Component{
 
     axios.post('/comments', data ).then(resp => {
       this.setState({...this.state, content: ''})
-      this.props.submit();
+      this.props.add();
     }).catch(err => {
       console.log(err)
     })
