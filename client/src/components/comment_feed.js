@@ -7,7 +7,8 @@ class CommentFeed extends Component {
     super(props)
 
     this.state = {
-      comments: []
+      comments: [],
+      
     }
   }
 
@@ -18,7 +19,7 @@ class CommentFeed extends Component {
     const { comments } = this.state;
 
     const commentComponents = comments.map((item, index) => {
-      return <Comment key={index} post={item}/>
+      return <Comment key={index} comment={item}/>
     })
 
     return (
