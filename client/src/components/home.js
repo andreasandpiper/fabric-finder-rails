@@ -29,7 +29,7 @@ class Home extends Component {
               Find My Fabric
             </h1>
             <h2 className="subtitle">
-              <a href="http://localhost:3000/users/sign_up" className="button is-white">Sign Up</a> 
+              <a href="/users/sign_up" className="button is-white">Sign Up</a> 
             </h2>
           </div>
         </div>
