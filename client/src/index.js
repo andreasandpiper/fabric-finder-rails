@@ -18,6 +18,7 @@ axios.interceptors.response.use(function (response) {
     return Promise.reject(error);
   });
 
+// Create into component?
 axios.get("/profile").then(resp => {
     console.log(resp)
     localStorage.setItem("logged_in", true);

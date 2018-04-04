@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Profile from './profile';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome/index'
 import caretup from  '@fortawesome/fontawesome-free-solid/faCaretUp';
 import caretdown from  '@fortawesome/fontawesome-free-solid/faCaretDown';

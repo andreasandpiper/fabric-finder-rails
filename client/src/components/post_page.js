@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import CommentForm from './comment_form';
+import CommentFeed from './comment_feed';
 import axios from 'axios';
 
 class PostPage extends Component{
@@ -10,21 +11,28 @@ class PostPage extends Component{
     this.state = {
       post: {},
       redirect: false,
-      user_id: localStorage.getItem("user_id")
+      user_id: localStorage.getItem("user_id"),
+      comments: []
     }
 
+    this.submitSuccess = this.submitSuccess.bind(this);
     this.deletePost = this.deletePost.bind(this);
   }
 
-  componentDidMount(){    
+  componentDidMount(){ 
     axios.get(`/posts/${this.props.match.params.id}.json`).then(resp => {
-      this.setState({...this.state, post: resp.data})
+      const post = {
+        created_at: resp.data.created_at,
+        description: resp.data.description,
+        id: resp.data.id,
+        image: resp.data.image,
+        user_id: resp.data.user_id
+      }
+      this.setState({...this.state, post: post, comments: resp.data.comments})
     }).catch(err => {
       console.log(err)
     })
   }
-
-  comp
 
   deletePost(){
     axios.delete(`/posts/${this.state.post.id}.json`).then(resp => {
@@ -32,6 +40,11 @@ class PostPage extends Component{
     }).catch(err => {
       console.log(err)
     })
+  }
+
+  submitSuccess(event){
+    event.preventDefault();
+    console.log("submit")
   }
 
   render(){
@@ -54,8 +67,9 @@ class PostPage extends Component{
           </div>
           <div className="column">
             <p>{ description }</p>
-            <CommentForm post_id={this.state.post.id}/>
-
+            <hr/>
+            <CommentForm submit={ this.submitSuccess }/>
+            <CommentFeed comments={this.state.comments }/>
           </div>
           <div className="has-text-right">
             { deleteBtn }

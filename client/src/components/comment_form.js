@@ -10,25 +10,18 @@ class CommentForm extends Component{
       post_id: this.props.post_id
     }
 
-    this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentWillReceiveProps(props){
     this.setState({...this.state, post_id: props.post_id})
   }
 
-  handleSubmit(event){
-    event.preventDefault();
-
-    const data = { data: this.state }
-
-    axios.post('/comments', data).then(resp => {
-      console.log(resp)
-    }).catch(err => {
-      console.log(err)
-    })
+  componentDidMount(){
+    console.log(this.props)
   }
+
 
   handleChange(event){
     const { value } = event.target;
@@ -36,11 +29,22 @@ class CommentForm extends Component{
     this.setState({...this.state, content: value})
   }
 
+  handleSubmit(event){
+    event.preventDefault();
+
+    axios.post('/comments', this.state ).then(resp => {
+      console.log(resp)
+
+    }).catch(err => {
+      console.log(err)
+    })
+    // this.props.submit(event, this.state);
+  }
+
   render(){
     return (
-      <form onSubmit={this.handleSubmit} className="column">
+      <form  onSubmit={this.handleSubmit} className="column">
       <div className="field">
-        <label className="label">Comment</label>
         <div className="control">
           <input className="input" type="text" name="content" value={this.state.content} onChange={this.handleChange} placeholder="Write what you know about this fabric!"/>
         </div>
