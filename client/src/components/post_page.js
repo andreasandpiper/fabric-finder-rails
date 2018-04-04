@@ -15,12 +15,12 @@ class PostPage extends Component{
       comments: []
     }
 
-    this.submitSuccess = this.submitSuccess.bind(this);
     this.deletePost = this.deletePost.bind(this);
   }
 
-  componentDidMount(){ 
+  componentDidMount(){    
     axios.get(`/posts/${this.props.match.params.id}.json`).then(resp => {
+      console.log(resp)
       const post = {
         created_at: resp.data.created_at,
         description: resp.data.description,
@@ -42,11 +42,6 @@ class PostPage extends Component{
     })
   }
 
-  submitSuccess(event){
-    event.preventDefault();
-    console.log("submit")
-  }
-
   render(){
     let deleteBtn = null; 
     if(!this.state.user_id){
@@ -59,6 +54,7 @@ class PostPage extends Component{
       deleteBtn = <p className="button is-danger is-outlined" onClick={this.deletePost}>Delete</p>
     }
 
+    console.log(this.state)
     return (
       <div className="container">
         <div className="columns">
@@ -68,8 +64,8 @@ class PostPage extends Component{
           <div className="column">
             <p>{ description }</p>
             <hr/>
-            <CommentForm submit={ this.submitSuccess }/>
-            <CommentFeed comments={this.state.comments }/>
+            <CommentForm submit={ this.updateComments }/>
+            <CommentFeed comments={ this.state.comments } />
           </div>
           <div className="has-text-right">
             { deleteBtn }
