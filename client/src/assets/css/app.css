@@ -38,6 +38,13 @@ h1 {
   width: auto;
   max-height: 100%;
 }
+
+/* COMMENTS */
+
+.vote:hover {
+  cursor: pointer;
+  color: #00d1b2;
+}
 /* Footer  */
 
 footer {

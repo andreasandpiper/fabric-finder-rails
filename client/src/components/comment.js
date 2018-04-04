@@ -10,7 +10,8 @@ class Comment extends Component{
 
     this.state = {
       comment: props.comment,
-      user_id: localStorage.getItem("user_id")
+      user_id: localStorage.getItem("user_id"),
+      votes_difference: 0
     }
 
   }
@@ -21,7 +22,15 @@ class Comment extends Component{
     }).catch(err => {
       console.log(err)
     })
+  }
 
+  upvoteComment(){
+    axios.post(`/comments/${this.state.comment.id}/upvote`).then(resp => {
+      console.log(resp)
+      //reload the comment
+    }).catch(err => {
+      console.log(err)
+    })
   }
 
   render(){
@@ -36,9 +45,9 @@ class Comment extends Component{
       <div className="box">
         <article className="media">
           <div className="media-left">
-            <FontAwesomeIcon icon={caretup} />
-            <span className="break"></span>
-            <FontAwesomeIcon icon={caretdown} />
+            <FontAwesomeIcon icon={caretup} className="vote" onClick={this.upvoteComment.bind(this)} />
+            <span className="break"><p>{ this.state.votes_difference }</p></span>
+            <FontAwesomeIcon icon={caretdown} className="vote"/>
 
           </div>
           <div className="media-content">
