@@ -18,21 +18,11 @@ class CommentFeed extends Component {
   }
 
   componentWillReceiveProps(props){
-    console.log(props)
     if(props.post_id){
       this.getComments(props.post_id)
     }
     this.setState({...this.state, post_id: props.post_id})
   }
-
-  // componentWillUpdate(nextProps, nextState){
-  //   console.log('state', this.state, ' next state', nextState)
-  //   if(this.state.comments.length !== nextState.comments.length && this.state.post_id){
-  //     // this.getComments(nextState.post_id)
-  //     // this.render();
-
-  //   }
-  // }
 
   getComments(id = this.state.post_id){
     axios.get(`/post/${id}/comments.json`).then(resp => {
@@ -43,7 +33,6 @@ class CommentFeed extends Component {
   }
 
   render(){
-    console.log(this.state)
     let commentsForm = null; 
     const { comments } = this.state;
 
