@@ -25,12 +25,6 @@ class VotesController < ApplicationController
 
   private
 
-  def getVoteCount(id)
-    upvote = Vote.where(:comment_id => id, :vote_type=> true).count
-    downvote = Vote.where(:comment_id => id, :vote_type=> false).count
-    return upvote - downvote
-  end
-
   def destroy(vote)
     if current_user.id == vote.user_id
       vote.destroy
