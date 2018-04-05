@@ -3,7 +3,6 @@ import Comment from './comment';
 import CommentForm from './comment_form';
 import axios from 'axios';
 
-
 class CommentFeed extends Component {
   constructor(props){
     super(props)
@@ -26,7 +25,6 @@ class CommentFeed extends Component {
 
   getComments(id = this.state.post_id){
     axios.get(`/post/${id}/comments.json`).then(resp => {
-      console.log(resp.data)
       this.setState({...this.state, comments: resp.data});
     }).catch(err => {
       console.log(err)
@@ -37,11 +35,8 @@ class CommentFeed extends Component {
     let commentsForm = null; 
     const { comments } = this.state;
 
-    console.log(comments)
-
     const commentComponents = comments.map((item, index) => {
       return <Comment key={index} comment={item} delete={this.getComments.bind(this)} />
-      
     })
 
     if(this.state.user_id){
@@ -57,6 +52,5 @@ class CommentFeed extends Component {
     )
   }
 }
-
 
 export default CommentFeed; 
