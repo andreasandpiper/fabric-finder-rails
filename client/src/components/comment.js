@@ -16,18 +16,7 @@ class Comment extends Component{
   }
 
   componentDidMount(){
-    this.calculateVotes(this.state.comment.votes);
-  }
-
-  calculateVotes(votes){
-    let upvoteCount = votes.reduce( (total, vote) => {
-      if(vote.vote_type){
-        return total+= 1;
-      } else {
-        return total-= 1;
-      }
-    }, 0);
-    this.setState({...this.state, votes_difference: upvoteCount})
+    // this.calculateVotes(this.state.comment.votes);
   }
 
   deleteComment(id){
@@ -40,7 +29,8 @@ class Comment extends Component{
 
   vote(type){
     axios.post(`/comments/${this.state.comment.id}/${type}.json`).then(resp => {
-      this.calculateVotes(resp.data.votes)
+      this.setState({...this.state, votes_difference:resp.data})
+      console.log(resp)
     }).catch(err => {
       console.log(err)
     })
@@ -61,7 +51,7 @@ class Comment extends Component{
         <article className="media">
           <div className="media-left">
             <FontAwesomeIcon icon={caretup} className="vote" onClick={this.vote.bind(this, "upvote")} />
-            <span className="break"><p>{ this.state.votes_difference }</p></span>
+            <span className="break"><p>{ this.state.votes_difference || 0 }</p></span>
             <FontAwesomeIcon icon={caretdown} className="vote" onClick={this.vote.bind(this, "downvote")}/>
 
           </div>

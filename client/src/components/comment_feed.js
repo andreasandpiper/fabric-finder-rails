@@ -36,6 +36,7 @@ class CommentFeed extends Component {
     const { comments } = this.state;
 
     const commentComponents = comments.map((item, index) => {
+      console.log(item)
       return <Comment key={index} comment={item} delete={this.getComments.bind(this)} />
     })
 
