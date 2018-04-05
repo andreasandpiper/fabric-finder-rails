@@ -9,8 +9,7 @@ class VotesController < ApplicationController
     else 
       destroy vote 
     end
-
-    render json: getVoteCount(comment.id)
+    render json: comment.vote_count
   end 
 
   def downvote
@@ -21,7 +20,7 @@ class VotesController < ApplicationController
     else 
       destroy vote 
     end 
-    render json: getVoteCount(comment.id)
+    render json: comment.vote_count
   end
 
   private
