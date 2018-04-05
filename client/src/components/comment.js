@@ -32,14 +32,42 @@ class Comment extends Component{
     })
   }
 
+  getTime(current, created){
+    let current_date = new Date(current);
+    let created_date = new Date(created);
+    let difference = (current_date - created_date); 
+
+    if(difference / (60*1000*60*24*30) > 1){
+      let months = Math.floor( difference / (60*1000*60*24*30));
+      return `${months} ${this.pluralize(months, "month")} ago`;
+    } else if (difference / (60*1000*60*24) > 1){
+      let days = Math.floor( difference / (60*1000*60*24) );
+      return `${days} ${this.pluralize(days, "day")} ago`;
+    }else if (difference / (60*1000*60) > 1){
+      let hours = Math.floor( difference / (60*1000*60) );
+      return `${hours} ${this.pluralize(hours, "hour")} ago`;
+    }else {
+      let minutes = Math.floor( difference / (60*1000) );
+      return `${minutes} ${this.pluralize(minutes, "minute")} ago`;
+    }
+  }
+
+  pluralize(num, word){
+    if(num === 1){
+      return word
+    }
+    return word + 's'
+  }
+
 
 
   render(){
-    let deleteBtn = null; 
     const { id, content, created_at } = this.props.comment;
+    let time_ago_in_words = this.getTime(this.props.time, created_at);
+    let deleteBtn = null; 
 
     if(this.props.comment.author_id == localStorage.getItem("user_id")){
-      deleteBtn = <p className="button is-danger is-outlined" onClick={this.deleteComment.bind(this, id)}>Delete</p>
+      deleteBtn = <button className="button is-danger is-outlined" onClick={this.deleteComment.bind(this, id)}>Delete</button>
     }
 
     return (
@@ -56,11 +84,11 @@ class Comment extends Component{
               <p>
                   {content}
               </p>
-              <div className="has-text-right">
-                <p>{ created_at }</p>
-                { deleteBtn }
-              </div>
             </div>
+          </div>
+          <div className="media-right">
+                <div className='has-text-right'>{ deleteBtn }</div>
+                <p>{ time_ago_in_words }</p>
           </div>
         </article>
       </div>

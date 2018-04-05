@@ -11,7 +11,7 @@ class ProfileController < ApplicationController
   def show
     user = User.find(params[:id])
     posts = user.posts
-    render json: { user: user, posts: posts}
+    render json: { user: user, posts: posts, time: Time.current}
   end 
 
 end

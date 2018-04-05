@@ -19,7 +19,9 @@ class CommentsController < ApplicationController
 
   def get_comments
     post = Post.find(params[:id])
-    render json: post.comments
+    current_time = Time.current
+    data = { time: current_time, comments: post.comments}
+    render json: data
   end
 
   private

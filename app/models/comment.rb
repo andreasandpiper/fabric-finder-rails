@@ -10,4 +10,5 @@ class Comment < ApplicationRecord
     downvote = Vote.where(:comment_id => self.id, :vote_type=> false).count
     upvote - downvote
   end 
+
 end

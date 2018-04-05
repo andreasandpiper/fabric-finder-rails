@@ -2,8 +2,9 @@ class PostsController < ApplicationController
   before_action :authenticate_user!, only: [:destroy, :create]
 
   def index
-    @posts = Post.all
-    render json: @posts
+    posts = Post.all
+    data = { posts:posts, time: Time.current }
+    render json: data
   end
 
   def create 

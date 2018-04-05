@@ -7,13 +7,14 @@ class Home extends Component {
     super(props);
 
     this.state = {
-      posts: []
+      posts: [],
+      time: null
     }
   }
 
   componentDidMount(){
     axios.get('/posts').then(resp => {
-      this.setState({posts: resp.data})
+      this.setState(resp.data)
     }).catch(err => {
       console.log(err)
     })
@@ -40,7 +41,7 @@ class Home extends Component {
             </div>
           </section>
         <div className= "container">
-          <Feed data={this.state.posts} />
+          <Feed data={this.state.posts} time={this.state.time} />
         </div>
       </div>
     )
