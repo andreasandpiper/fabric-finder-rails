@@ -13,7 +13,6 @@ class Comment extends Component{
       user_id: localStorage.getItem("user_id"),
       votes_difference: 0
     }
-
   }
 
   componentDidMount(){
@@ -31,8 +30,8 @@ class Comment extends Component{
     this.setState({...this.state, votes_difference: upvoteCount})
   }
 
-  deleteComment(){
-    axios.delete(`/comments/${this.state.comment.id}.json`).then(resp => {
+  deleteComment(id){
+    axios.delete(`/comments/${id}.json`).then(resp => {
       this.props.delete();
     }).catch(err => {
       console.log(err)
@@ -41,7 +40,6 @@ class Comment extends Component{
 
   vote(type){
     axios.post(`/comments/${this.state.comment.id}/${type}.json`).then(resp => {
-      console.log(resp)
       this.calculateVotes(resp.data.votes)
     }).catch(err => {
       console.log(err)
@@ -51,12 +49,11 @@ class Comment extends Component{
 
 
   render(){
-
     let deleteBtn = null; 
-    const { content, created_at } = this.state.comment;
+    const { id, content, created_at } = this.props.comment;
 
-    if(this.state.comment.author_id == this.state.user_id){
-      deleteBtn = <p className="button is-danger is-outlined" onClick={this.deleteComment.bind(this)}>Delete</p>
+    if(this.props.comment.author_id == localStorage.getItem("user_id")){
+      deleteBtn = <p className="button is-danger is-outlined" onClick={this.deleteComment.bind(this, id)}>Delete</p>
     }
 
     return (

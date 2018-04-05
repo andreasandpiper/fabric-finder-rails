@@ -30,10 +30,10 @@ class CommentForm extends Component{
     const data = {
       data: this.state 
     }
-
+    
     axios.post('/comments', data ).then(resp => {
-      this.setState({...this.state, content: ''})
       this.props.add();
+      this.setState({...this.state, content: ''})
     }).catch(err => {
       console.log(err)
     })
