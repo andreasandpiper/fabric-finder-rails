@@ -10,7 +10,7 @@ class Comment extends Component{
     super(props)
 
     this.state = {
-      comment: props.comment,
+      comment: props.comment.comment,
       user_id: localStorage.getItem("user_id"),
       votes_difference: props.comment.vote_count
     }
@@ -34,7 +34,8 @@ class Comment extends Component{
   }
 
   render(){
-    const { id, content, created_at } = this.props.comment;
+
+    const { id, content, created_at } = this.props.comment.comment;
     let time_ago_in_words = this.props.getTime(this.props.time, created_at)
     let deleteBtn = null; 
 

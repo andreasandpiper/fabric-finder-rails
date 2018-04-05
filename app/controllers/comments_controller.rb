@@ -20,7 +20,11 @@ class CommentsController < ApplicationController
   def get_comments
     post = Post.find(params[:id])
     current_time = Time.current
-    data = { time: current_time, comments: post.comments}
+    comments = post.comments.map do |comment|  
+      { comment: comment, vote_count: comment.vote_count}    
+    end  
+    data = { time: current_time, comments: comments}
+
     render json: data
   end
 

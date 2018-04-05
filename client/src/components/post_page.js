@@ -18,6 +18,7 @@ class PostPage extends Component{
 
   componentDidMount(){    
     axios.get(`/posts/${this.props.match.params.id}.json`).then(resp => {
+      console.log(resp)
       this.setState({...this.state, post: resp.data})
     }).catch(err => {
       console.log(err)
