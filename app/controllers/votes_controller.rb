@@ -5,27 +5,32 @@ class VotesController < ApplicationController
     vote = Vote.find_by(comment_id: params[:id], user_id: current_user.id)
     comment = Comment.find(params[:id])
     if !vote
-      comment.votes.create(comment_id: params[:id], user_id: current_user.id, vote_type: true)
+      comment.votes.create(user_id: current_user.id, vote_type: true)
     else 
       destroy vote 
     end
-    comment = Comment.find(params[:id])
-    render json: comment
+
+    render json: getVoteCount(comment.id)
   end 
 
   def downvote
     vote = Vote.find_by(comment_id: params[:id], user_id: current_user.id)
     comment = Comment.find(params[:id])
     if !vote
-      comment.votes.create(comment_id: params[:id], user_id: current_user.id, vote_type: false)
+      comment.votes.create(user_id: current_user.id, vote_type: false)
     else 
       destroy vote 
     end 
-    comment = Comment.find(params[:id])
-    render json: comment
+    render json: getVoteCount(comment.id)
   end
 
   private
+
+  def getVoteCount(id)
+    upvote = Vote.where(:comment_id => id, :vote_type=> true).count
+    downvote = Vote.where(:comment_id => id, :vote_type=> false).count
+    return upvote - downvote
+  end
 
   def destroy(vote)
     if current_user.id == vote.user_id
