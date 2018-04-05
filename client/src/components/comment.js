@@ -11,7 +11,7 @@ class Comment extends Component{
     this.state = {
       comment: props.comment,
       user_id: localStorage.getItem("user_id"),
-      votes_difference: 0
+      votes_difference: props.comment.vote_count
     }
   }
 
@@ -47,7 +47,7 @@ class Comment extends Component{
         <article className="media">
           <div className="media-left">
             <FontAwesomeIcon icon={caretup} className="vote" onClick={this.vote.bind(this, "upvote")} />
-            <span className="break"><p>{ this.props.votes_difference || this.state.votes_difference }</p></span>
+            <span className="break"><p>{ this.state.votes_difference || 0 }</p></span>
             <FontAwesomeIcon icon={caretdown} className="vote" onClick={this.vote.bind(this, "downvote")}/>
 
           </div>

@@ -19,7 +19,6 @@ class Profile extends Component {
     const id = localStorage.getItem("user_id"); 
 
     axios.get(`profile/${id}`).then(resp => {
-      console.log(resp);
       this.setState({user: resp.data.user, posts: resp.data.posts})
     }).catch(err => {
       console.log(err)

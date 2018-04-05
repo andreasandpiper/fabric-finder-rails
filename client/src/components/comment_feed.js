@@ -47,7 +47,7 @@ class CommentFeed extends Component {
     return (
       <div>
         { commentsForm }
-        <h4>Comments</h4>
+        <h4 className="has-text-centered has-text-weight-bold is-size-4">Comments</h4>
         { commentComponents }
       </div>
     )
