@@ -5,28 +5,35 @@ import caretup from  '@fortawesome/fontawesome-free-solid/faCaretUp';
 import caretdown from  '@fortawesome/fontawesome-free-solid/faCaretDown';
 
 export default (props) => {
-  const { description, image, created_at, id } = props.post;
+  const { description, image, created_at, id, comment_count } = props.post;
 
   function getTimeElapsed(date){
     return date;
   }
-  return (
-    
+
+  console.log(props)
+
+  return (    
     <div className="box">
       <article className="media">
         <div className="media-left">
+          <h3 className="has-text-centered">{ comment_count }</h3>
+          <p>comments</p>
+        </div>
+        <div className="media-left">
           <figure className="image is-128x128">
-            <img src={image} alt="Image"/>
             <Link to={`/post/${id}`}>
-              <p className="has-text-centered">View Post</p>
+              <img src={image} alt="Image"/>
             </Link>
           </figure>
         </div>
         <div className="media-content">
           <div className="content">
-            <p>
+            <h3>
+              <Link to={`/post/${id}`}>
                 {description}
-            </p>
+              </Link>
+            </h3>
             <div className="has-text-right">
               {/* <Link to={`user/${user_id}`}><span><strong >{user_name}</strong></span></Link> */}
               <p>{getTimeElapsed(created_at)}</p>
