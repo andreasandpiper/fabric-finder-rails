@@ -35,11 +35,11 @@ class Comment extends Component{
 
   render(){
 
-    const { id, content, created_at } = this.props.comment.comment;
+    const { id, content, created_at, author_id } = this.props.comment.comment;
     let time_ago_in_words = this.props.getTime(this.props.time, created_at)
     let deleteBtn = null; 
 
-    if(this.props.comment.author_id == localStorage.getItem("user_id")){
+    if(author_id == localStorage.getItem("user_id")){
       deleteBtn = <button className="button is-danger is-outlined" onClick={this.deleteComment.bind(this, id)}>Delete</button>
     }
 
