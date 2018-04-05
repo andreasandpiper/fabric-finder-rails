@@ -25,6 +25,7 @@ export default (props) => {
       let minutes = Math.floor( difference / (60*1000) );
       return `${minutes} ${pluralize(minutes, "minute")} ago`;
     }
+    
   }
 
   function pluralize(num, word){

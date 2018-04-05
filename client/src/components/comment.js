@@ -3,6 +3,7 @@ import FontAwesomeIcon from '@fortawesome/react-fontawesome/index'
 import caretup from  '@fortawesome/fontawesome-free-solid/faCaretUp';
 import caretdown from  '@fortawesome/fontawesome-free-solid/faCaretDown';
 import axios from 'axios';
+import getTime from '../HOC/time_ago';
 
 class Comment extends Component{
   constructor(props){
@@ -32,38 +33,9 @@ class Comment extends Component{
     })
   }
 
-  getTime(current, created){
-    let current_date = new Date(current);
-    let created_date = new Date(created);
-    let difference = (current_date - created_date); 
-
-    if(difference / (60*1000*60*24*30) > 1){
-      let months = Math.floor( difference / (60*1000*60*24*30));
-      return `${months} ${this.pluralize(months, "month")} ago`;
-    } else if (difference / (60*1000*60*24) > 1){
-      let days = Math.floor( difference / (60*1000*60*24) );
-      return `${days} ${this.pluralize(days, "day")} ago`;
-    }else if (difference / (60*1000*60) > 1){
-      let hours = Math.floor( difference / (60*1000*60) );
-      return `${hours} ${this.pluralize(hours, "hour")} ago`;
-    }else {
-      let minutes = Math.floor( difference / (60*1000) );
-      return `${minutes} ${this.pluralize(minutes, "minute")} ago`;
-    }
-  }
-
-  pluralize(num, word){
-    if(num === 1){
-      return word
-    }
-    return word + 's'
-  }
-
-
-
   render(){
     const { id, content, created_at } = this.props.comment;
-    let time_ago_in_words = this.getTime(this.props.time, created_at);
+    let time_ago_in_words = this.props.getTime(this.props.time, created_at)
     let deleteBtn = null; 
 
     if(this.props.comment.author_id == localStorage.getItem("user_id")){
@@ -96,4 +68,4 @@ class Comment extends Component{
   }
 }
 
-export default Comment; 
+export default getTime(Comment); 
