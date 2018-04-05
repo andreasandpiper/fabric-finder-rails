@@ -51,7 +51,7 @@ class PostForm extends Component{
         <div className="field">
           <label className="label">Fabric Image</label>
           <div className="control">
-            <input className="input" type="file" name="image" value={this.state.image} onChange={this.handleChange} placeholder="Image URL"/>
+            <input className="input" type="text" name="image" value={this.state.image} onChange={this.handleChange} placeholder="Image URL"/>
           </div>
         </div>
 
