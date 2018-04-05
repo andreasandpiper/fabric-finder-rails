@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 export default function(WrappedComponent){
   return class extends Component{
     getTime(current, created, pluralize){
+
       let current_date = new Date(current);
       let created_date = new Date(created);
       let difference = (current_date - created_date); 
@@ -19,17 +20,17 @@ export default function(WrappedComponent){
         let minutes = Math.floor( difference / (60*1000) );
         return `${minutes} ${pluralize(minutes, "minute")} ago`;
       }
-    }
-  
-    pluralize(num, word){
-      if(num === 1){
-        return word
+
+      function pluralize(num, word){
+        if(num === 1){
+          return word
+        }
+        return word + 's'
       }
-      return word + 's'
     }
 
     render(){
-        return <WrappedComponent {...this.props} getTime={this.getTime.bind(null,null,null,this.pluralize)}/>
+        return <WrappedComponent {...this.props} getTime={this.getTime.bind()}/>
     }
   }
 }
