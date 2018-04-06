@@ -5,6 +5,11 @@
     <%= devise_error_messages! %>
 
     <div class="field">
+      <%= f.label :username %><br />
+      <%= f.text_field :username, class: "input",  autofocus: true, autocomplete: "username" %>
+    </div>
+
+    <div class="field">
       <%= f.label :email %><br />
       <%= f.email_field :email, class: "input",  autofocus: true, autocomplete: "email" %>
     </div>
