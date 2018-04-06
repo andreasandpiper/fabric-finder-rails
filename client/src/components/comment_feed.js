@@ -26,6 +26,7 @@ class CommentFeed extends Component {
 
   getComments(id = this.state.post_id){
     axios.get(`/post/${id}/comments.json`).then(resp => {
+      console.log(resp)
       this.setState({...this.state, comments: resp.data.comments, DB_time: resp.data.time});
     }).catch(err => {
       console.log(err)
@@ -37,7 +38,7 @@ class CommentFeed extends Component {
     const { comments } = this.state;
 
     const commentComponents = comments.map((item, index) => {
-      return <Comment key={index} comment={item} time={this.state.DB_time} delete={this.getComments.bind(this)} />
+      return <Comment key={index} comment={item} time={this.state.DB_time} getNew={this.getComments.bind(this)} />
     })
 
     if(this.state.user_id){

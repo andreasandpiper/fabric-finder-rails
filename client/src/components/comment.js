@@ -8,17 +8,15 @@ import getTime from '../HOC/time_ago';
 class Comment extends Component{
   constructor(props){
     super(props)
+  }
 
-    this.state = {
-      comment: props.comment.comment,
-      user_id: localStorage.getItem("user_id"),
-      votes_difference: props.comment.vote_count
-    }
+  componentDidMount(){
+    this.setState({comment: this.props.comment.comment, votes_difference: this.props.comment.vote_count})
   }
 
   deleteComment(id){
     axios.delete(`/comments/${id}.json`).then(resp => {
-      this.props.delete();
+      this.props.getNew();
     }).catch(err => {
       console.log(err)
     })
@@ -26,8 +24,7 @@ class Comment extends Component{
 
   vote(type){
     axios.post(`/comments/${this.state.comment.id}/${type}.json`).then(resp => {
-      this.setState({...this.state, votes_difference: resp.data})
-      console.log(resp)
+      this.props.getNew();
     }).catch(err => {
       console.log(err)
     })
@@ -47,7 +44,7 @@ class Comment extends Component{
         <article className="media">
           <div className="media-left">
             <FontAwesomeIcon icon={caretup} className="vote" onClick={this.vote.bind(this, "upvote")} />
-            <span className="break"><p>{ this.state.votes_difference || 0 }</p></span>
+            <span className="break"><p>{ this.props.comment.vote_count || 0 }</p></span>
             <FontAwesomeIcon icon={caretdown} className="vote" onClick={this.vote.bind(this, "downvote")}/>
 
           </div>
