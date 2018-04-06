@@ -3,7 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
 
   #Virtual attribute to authenticate by email or username
-  attr_accessor :login
+  attr_accessor :login, :gravatar
   validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true
   validate :validate_username
   has_many :posts, dependent: :destroy
@@ -23,5 +23,10 @@ class User < ApplicationRecord
     if User.where(email: username).exists?
       errors.add(:username, :invalid)
     end
+  end
+
+  def gravatar
+    gravatar_id = Digest::MD5::hexdigest(self.email)
+    gravatar_url = "https://secure.gravatar.com/avatar/#{gravatar_id}?s=#{80}"
   end
 end
