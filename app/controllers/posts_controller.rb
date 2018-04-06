@@ -3,8 +3,7 @@ class PostsController < ApplicationController
 
   def index
     posts = Post.all
-    data = { posts:posts, time: Time.current }
-    render json: data
+    render json: posts, include: "*.*"
   end
 
   def create 

@@ -10,7 +10,7 @@ class Feed extends Component {
   render(){
 
     var posts = this.props.data.map((item, index) => {
-      return <Post key={index} post={item} time={this.props.time}/>
+      return <Post key={index} post={item}/>
     })
 
     return (

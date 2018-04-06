@@ -7,22 +7,20 @@ class Home extends Component {
     super(props);
 
     this.state = {
-      posts: [],
-      time: null
+      posts: []
     }
   }
 
   componentDidMount(){
     axios.get('/posts').then(resp => {
-      console.log(resp)
-
-      this.setState(resp.data)
+      this.setState({posts: resp.data})
     }).catch(err => {
       console.log(err)
     })
   }
 
   render(){
+    console.log(this.state)
     let signUpBtn = null; 
 
     if(!localStorage.getItem("user_id")){
@@ -43,7 +41,7 @@ class Home extends Component {
             </div>
           </section>
         <div className= "container">
-          <Feed data={this.state.posts} time={this.state.time} />
+          <Feed data={this.state.posts}/>
         </div>
       </div>
     )

@@ -12,11 +12,14 @@ class Post extends Component{
 
   render(){
     console.log(this.props)
-    const { description, image, created_at, id, user_id, gravatar } = this.props.post;
+    const { description, image, created_at, id, time } = this.props.post;
+    const {username, gravatar } = this.props.post.user; 
+    const userLink = `/user/${this.props.post.user.id}`;
     let deleteBtn = null; 
+    let user_image = null;
 
     if(gravatar){
-      return <img src={gravatar} alt="Image"/>
+      user_image = <img src={gravatar} alt="Image"/>
     }
   
     return (    
@@ -40,8 +43,9 @@ class Post extends Component{
           </div>
           <div className="media-right">
             <figure className="image is-128x128">
-            { gravatar }
-                <p>posted {this.props.getTime(this.props.time, created_at)}</p>
+              { user_image }
+              <Link to={userLink}>{ username }</Link>
+              <p>posted {this.props.getTime(time, created_at)}</p>
             </figure>
           </div>
         </article>
