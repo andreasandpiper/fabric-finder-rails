@@ -10,7 +10,7 @@ import PostForm from './post_form';
 
 
 const App = () => (
-    <div className="main-container">
+    <div className="wrapper">
         <Header />
         <Route exact path="/" component={Home}/>
         <Route path="/user/:id" component={Profile}/>

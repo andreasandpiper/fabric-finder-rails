@@ -49,6 +49,7 @@ class Profile extends Component {
             </div>
           </div>
         </div>
+        <a href="">Account Settings</a>
           </div>
           <div className="column is-three-quarters">
             <Feed data={this.state.posts} time={this.state.time}/>

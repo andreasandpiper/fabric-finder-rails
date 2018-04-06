@@ -12,6 +12,7 @@ h1 {
 
 .container {
   margin: 20px auto;
+  padding: 0 10px;
 }
 
 .main-container > .columns {
@@ -20,6 +21,10 @@ h1 {
 
 
 /* Header */
+
+.navbar-burger span {
+  color: white;
+}
 
 .subtitle a {
   font-size:  1em;

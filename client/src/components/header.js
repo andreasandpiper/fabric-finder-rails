@@ -8,7 +8,8 @@ class Header extends Component{
     super(props)
 
     this.state = {
-      user_id: localStorage.getItem("user_id")
+      user_id: localStorage.getItem("user_id"),
+      mobile_state: false
     }
 
     this.logout = this.logout.bind(this);
@@ -29,20 +30,26 @@ class Header extends Component{
     localStorage.removeItem("user_id");
   }
 
+  openMenu(){
+    this.setState({...this.state, mobile_state: !this.state.mobile_state})
+
+  }
+
   render (){
+
     if(this.state.user_id){
       return (
         <div>
             <nav className="navbar" role="navigation" aria-label="dropdown navigation">
-              <div className="navbar-brand">
+              <div className="navbar-brand" onClick={this.openMenu.bind(this)}>
                 <Link to="/" className="navbar-item">Home</Link>
-                <div className="navbar-burger">
+                <div className={this.state.mobile_state ? 'navbar-burger is-active' : 'navbar-burger'} data-target="navMenu">
                   <span></span>
                   <span></span>
                   <span></span>
                 </div>
               </div>
-              <div className="navbar-menu">
+              <div className={this.state.mobile_state ? 'navbar-menu is-active' : 'navbar-menu'} id="navMenu">
                 <div className="navbar-end">
                   <Link to="/user/1" className="navbar-item">Profile</Link>
                   <Link to="/post" className="navbar-item">Post</Link>
@@ -58,13 +65,13 @@ class Header extends Component{
           <nav className="navbar" role="navigation" aria-label="dropdown navigation">
             <div className="navbar-brand">
               <Link to="/" className="navbar-item">Home</Link>
-              <div className="navbar-burger">
+              <div className={this.state.mobile_state ? 'navbar-burger is-active' : 'navbar-burger'} data-target="navMenu">
                 <span></span>
                 <span></span>
                 <span></span>
               </div>
             </div>
-            <div className="navbar-menu">
+            <div className={this.state.mobile_state ? 'navbar-menu is-active' : 'navbar-menu'} id="navMenu">
               <div className="navbar-end">
                 <a href="/users/sign_in" className="navbar-item">Login</a>  
               </div>
