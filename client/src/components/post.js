@@ -11,8 +11,7 @@ class Post extends Component{
   }
 
   render(){
-    console.log(this.props)
-    const { description, image, created_at, id, time } = this.props.post;
+    const { description, image, created_at, id, time, user_id } = this.props.post;
     const {username, gravatar } = this.props.post.user; 
     const userLink = `/user/${this.props.post.user.id}`;
     let deleteBtn = null; 
@@ -21,9 +20,12 @@ class Post extends Component{
     if(gravatar){
       user_image = <img src={gravatar} alt="Image"/>
     }
+
+    // if(user_id == localStorage.getItem("user_id")){
+    //   deleteBtn = <button className="button is-danger is-outlined">Delete</button>
+    // }
   
     return (    
-      <div className="box">
         <article className="media">
           <div className="media-left">
             <figure className="image is-128x128">
@@ -42,14 +44,15 @@ class Post extends Component{
             </div>
           </div>
           <div className="media-right">
-            <figure className="image is-128x128">
+            <figure className="image is-48x48 ">
               { user_image }
-              <Link to={userLink}>{ username }</Link>
-              <p>posted {this.props.getTime(time, created_at)}</p>
             </figure>
+            <span className="linebreak"></span>
+            <Link to={userLink}>{ username }</Link>
+            <p>posted {this.props.getTime(time, created_at)}</p>
+            { deleteBtn }
           </div>
         </article>
-      </div>
     )
   }
 }

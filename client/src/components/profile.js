@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Feed from './feed';
+import Feed from './post_feed';
 import logged_in from '../HOC/user_status';
 
 class Profile extends Component {

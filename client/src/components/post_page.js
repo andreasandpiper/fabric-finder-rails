@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { Redirect } from 'react-router-dom';
 import CommentFeed from './comment_feed';
 import axios from 'axios';
@@ -34,8 +35,8 @@ class PostPage extends Component{
   }
 
   render(){
-    console.log(this.state)
     let deleteBtn = null; 
+    let userLink = `/user/${this.state.user.id}`;
 
     const { created_at, description, image, user_name, id, user_id } = this.state.post; 
     const { gravatar, username } = this.state.user; 
@@ -58,7 +59,7 @@ class PostPage extends Component{
               </div>
               <div className="column has-text-right is-one-third">
                  <img src={gravatar} alt={username}/>
-                 <p>{ username }</p>
+                 <h4><Link to={userLink}>{ username }</Link></h4>
                   { deleteBtn }
               </div>
             </div>

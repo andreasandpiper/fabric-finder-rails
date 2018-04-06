@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Feed from './feed';
+import Feed from './post_feed';
 import axios from 'axios';
 
 class Home extends Component {

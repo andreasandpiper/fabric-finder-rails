@@ -6,6 +6,10 @@ class Feed extends Component {
     super(props)
   }
 
+  deletePost(id){
+    
+  }
+
 
   render(){
 
