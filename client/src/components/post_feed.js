@@ -6,15 +6,7 @@ class Feed extends Component {
     super(props)
   }
 
-  deletePost(id){
-    
-  }
-
-
   render(){
-
-    console.log(this.props)
-
     var posts = this.props.data.map((item, index) => {
       return <Post key={index} post={item}/>
     })

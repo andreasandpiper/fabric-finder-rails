@@ -34,7 +34,6 @@ class Comment extends Component{
   }
 
   render(){
-
     const { id, content, created_at, author_id } = this.props.comment.comment;
     let time_ago_in_words = this.props.getTime(this.props.time, created_at)
     let deleteBtn = null; 

@@ -13,7 +13,7 @@ class Post extends Component{
   render(){
     const { description, image, created_at, id, time, user_id } = this.props.post;
     const {username, gravatar } = this.props.post.user; 
-    const userLink = `/user/${this.props.post.user.id}`;
+    let userLink = `/user/${this.props.post.user.id}`;
     let deleteBtn = null; 
     let user_image = null;
 
