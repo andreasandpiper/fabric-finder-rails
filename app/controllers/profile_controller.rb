@@ -1,4 +1,7 @@
 class ProfileController < ApplicationController
+  def default_serializer_options
+    { each_serializer: UserSerializer }
+  end
 
   def index
     if user_signed_in? 
@@ -11,7 +14,7 @@ class ProfileController < ApplicationController
   def show
     user = User.find(params[:id])
     posts = user.posts
-    render json: { user: user, posts: posts, time: Time.current}
+    render json: { user:  UserSerializer.new(user), posts: posts, time: Time.current}
   end 
 
 end

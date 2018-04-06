@@ -28,7 +28,8 @@ class Profile extends Component {
 
   
   render () {
-    const { email } = this.state.user; 
+    const { username } = this.state.user; 
+    console.log(this.state)
 
     return (
       <div className="container">
@@ -43,7 +44,7 @@ class Profile extends Component {
           <div className="card-content">
             <div className="media">
               <div className="media-content">
-                <p className="title is-4">{ email } </p>
+                <p className="title is-4">{ username } </p>
               </div>
             </div>
           </div>
