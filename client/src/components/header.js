@@ -32,7 +32,6 @@ class Header extends Component{
 
   openMenu(){
     this.setState({...this.state, mobile_state: !this.state.mobile_state})
-
   }
 
   render (){
@@ -41,9 +40,9 @@ class Header extends Component{
       return (
         <div>
             <nav className="navbar" role="navigation" aria-label="dropdown navigation">
-              <div className="navbar-brand" onClick={this.openMenu.bind(this)}>
+              <div className="navbar-brand">
                 <Link to="/" className="navbar-item">Home</Link>
-                <div className={this.state.mobile_state ? 'navbar-burger is-active' : 'navbar-burger'} data-target="navMenu">
+                <div onClick={this.openMenu.bind(this)} className={this.state.mobile_state ? 'navbar-burger is-active' : 'navbar-burger'} data-target="navMenu">
                   <span></span>
                   <span></span>
                   <span></span>
@@ -65,7 +64,7 @@ class Header extends Component{
           <nav className="navbar" role="navigation" aria-label="dropdown navigation">
             <div className="navbar-brand">
               <Link to="/" className="navbar-item">Home</Link>
-              <div className={this.state.mobile_state ? 'navbar-burger is-active' : 'navbar-burger'} data-target="navMenu">
+              <div onClick={this.openMenu.bind(this)} className={this.state.mobile_state ? 'navbar-burger is-active' : 'navbar-burger'} data-target="navMenu">
                 <span></span>
                 <span></span>
                 <span></span>
