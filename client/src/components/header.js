@@ -35,6 +35,7 @@ class Header extends Component{
   }
 
   render (){
+    const profilePath = `/user/${this.state.user_id}`
 
     if(this.state.user_id){
       return (
@@ -50,7 +51,7 @@ class Header extends Component{
               </div>
               <div className={this.state.mobile_state ? 'navbar-menu is-active' : 'navbar-menu'} id="navMenu">
                 <div className="navbar-end">
-                  <Link to="/user/1" className="navbar-item">Profile</Link>
+                  <Link to={ profilePath } className="navbar-item">Profile</Link>
                   <Link to="/post" className="navbar-item">Post</Link>
                   <a href="/users/sign_out" onClick={this.logout} className="navbar-item">Logout</a>  
                 </div>

@@ -9,6 +9,8 @@ class Feed extends Component {
 
   render(){
 
+    console.log(this.props)
+
     var posts = this.props.data.map((item, index) => {
       return <Post key={index} post={item}/>
     })

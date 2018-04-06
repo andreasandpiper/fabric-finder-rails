@@ -9,18 +9,15 @@ class Profile extends Component {
 
   this.state = {
     user: {},
-    posts: [],
-    time: null
+    posts: []
   }
   }
 
   componentWillMount(){
     this.props.is_logged_in();
 
-    const id = localStorage.getItem("user_id"); 
-
-    axios.get(`/profile/${id}`).then(resp => {
-      this.setState({user: resp.data.user, time: resp.data.time, posts: resp.data.user.posts})
+    axios.get(`/profile/${this.props.match.params.id}`).then(resp => {
+      this.setState({user: resp.data, posts: resp.data.posts})
     }).catch(err => {
       console.log(err)
     })
@@ -51,7 +48,7 @@ class Profile extends Component {
         <a href="/users/edit">Account Settings</a>
           </div>
           <div className="column is-three-quarters">
-            <Feed data={this.state.posts} time={this.state.time}/>
+            <Feed data={this.state.posts}/>
           </div>
         </div>
       </div>
