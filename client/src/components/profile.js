@@ -26,6 +26,11 @@ class Profile extends Component {
   
   render () {
     const { username, gravatar } = this.state.user; 
+    let account_settings = null; 
+
+    if(this.state.user.id == localStorage.getItem("user_id")){
+      account_settings = <a href="/users/edit">Account Settings</a>
+    }
 
     return (
       <div className="container">
@@ -45,8 +50,8 @@ class Profile extends Component {
             </div>
           </div>
         </div>
-        <a href="/users/edit">Account Settings</a>
-          </div>
+        { account_settings }
+      </div>
           <div className="column is-three-quarters">
             <Feed data={this.state.posts}/>
           </div>
