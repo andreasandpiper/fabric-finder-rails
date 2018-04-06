@@ -14,6 +14,8 @@ class Home extends Component {
 
   componentDidMount(){
     axios.get('/posts').then(resp => {
+      console.log(resp)
+
       this.setState(resp.data)
     }).catch(err => {
       console.log(err)

@@ -11,8 +11,13 @@ class Post extends Component{
   }
 
   render(){
-    const { description, image, created_at, id, user_id } = this.props.post;
+    console.log(this.props)
+    const { description, image, created_at, id, user_id, gravatar } = this.props.post;
     let deleteBtn = null; 
+
+    if(gravatar){
+      return <img src={gravatar} alt="Image"/>
+    }
   
     return (    
       <div className="box">
@@ -31,10 +36,13 @@ class Post extends Component{
                   {description}
                 </Link>
               </h3>
-              <div className="has-text-right">
-                <p>posted {this.props.getTime(this.props.time, created_at)}</p>
-              </div>
             </div>
+          </div>
+          <div className="media-right">
+            <figure className="image is-128x128">
+            { gravatar }
+                <p>posted {this.props.getTime(this.props.time, created_at)}</p>
+            </figure>
           </div>
         </article>
       </div>

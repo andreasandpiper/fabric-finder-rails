@@ -9,7 +9,7 @@ class Profile extends Component {
 
   this.state = {
     user: {},
-    posts: [], 
+    posts: [],
     time: null
   }
   }
@@ -20,7 +20,7 @@ class Profile extends Component {
     const id = localStorage.getItem("user_id"); 
 
     axios.get(`/profile/${id}`).then(resp => {
-      this.setState({user: resp.data.user, posts: resp.data.posts, time: resp.data.time})
+      this.setState({user: resp.data.user, time: resp.data.time, posts: resp.data.user.posts})
     }).catch(err => {
       console.log(err)
     })

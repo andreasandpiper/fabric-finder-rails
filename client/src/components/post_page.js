@@ -9,6 +9,7 @@ class PostPage extends Component{
 
     this.state = {
       post: {},
+      user: {},
       redirect: false,
       user_id: localStorage.getItem("user_id")
     }
@@ -18,8 +19,7 @@ class PostPage extends Component{
 
   componentDidMount(){    
     axios.get(`/posts/${this.props.match.params.id}.json`).then(resp => {
-      console.log(resp)
-      this.setState({...this.state, post: resp.data})
+      this.setState({...this.state, post: resp.data, user: resp.data.user})
     }).catch(err => {
       console.log(err)
     })
@@ -34,16 +34,16 @@ class PostPage extends Component{
   }
 
   render(){
+    console.log(this.state)
     let deleteBtn = null; 
 
     const { created_at, description, image, user_name, id, user_id } = this.state.post; 
+    const { gravatar, username } = this.state.user; 
     const delete_route = "/posts/" + id; 
 
     if(this.state.user_id == user_id){
-      deleteBtn = <p className="button is-danger is-outlined" onClick={this.deletePost}>Delete</p>
+      deleteBtn = <button className="button is-danger is-outlined" onClick={this.deletePost}>Delete</button>
     }
-
-
 
     return (
       <div className="container">
@@ -52,12 +52,18 @@ class PostPage extends Component{
             <img src={ image } alt="fabric image" />
           </div>
           <div className="column">
-            <p>{ description }</p>
+            <div className="columns">
+              <div className="column is-two-thirds">
+                <p>{ description }</p>
+              </div>
+              <div className="column has-text-right is-one-third">
+                 <img src={gravatar} alt={username}/>
+                 <p>{ username }</p>
+                  { deleteBtn }
+              </div>
+            </div>
             <hr/>
             <CommentFeed post_id={this.state.post.id }/>
-          </div>
-          <div className="has-text-right">
-            { deleteBtn }
           </div>
         </div>
       </div>

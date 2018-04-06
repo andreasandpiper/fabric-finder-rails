@@ -13,8 +13,7 @@ class ProfileController < ApplicationController
 
   def show
     user = User.find(params[:id])
-    posts = user.posts
-    render json: { user:  UserSerializer.new(user), posts: posts, time: Time.current}
+    render json: { user:  UserSerializer.new(user), time: Time.current}
   end 
 
 end
