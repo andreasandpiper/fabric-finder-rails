@@ -8,6 +8,7 @@ import getTime from '../HOC/time_ago';
 class Comment extends Component{
   constructor(props){
     super(props)
+
   }
 
   componentDidMount(){
@@ -34,20 +35,32 @@ class Comment extends Component{
     const { id, content, created_at, author_id } = this.props.comment.comment;
     let time_ago_in_words = this.props.getTime(this.props.time, created_at)
     let deleteBtn = null; 
+    let voteBtns = (
+        <div className="media-left">
+          <FontAwesomeIcon icon={caretup} />
+          <span className="break"><p>{ this.props.comment.vote_count || 0 }</p></span>
+          <FontAwesomeIcon icon={caretdown} />
+        </div>
+    )
 
     if(author_id == localStorage.getItem("user_id")){
       deleteBtn = <button className="button is-danger is-outlined" onClick={this.deleteComment.bind(this, id)}>Delete</button>
     }
 
+    if(localStorage.getItem("user_id")){
+      voteBtns = (
+        <div className="media-left">
+          <FontAwesomeIcon icon={caretup} className="vote" onClick={this.vote.bind(this, "upvote")} />
+          <span className="break"><p>{ this.props.comment.vote_count || 0 }</p></span>
+          <FontAwesomeIcon icon={caretdown} className="vote" onClick={this.vote.bind(this, "downvote")}/>
+        </div>
+      )
+    }
+
     return (
       <div className="box">
         <article className="media">
-          <div className="media-left">
-            <FontAwesomeIcon icon={caretup} className="vote" onClick={this.vote.bind(this, "upvote")} />
-            <span className="break"><p>{ this.props.comment.vote_count || 0 }</p></span>
-            <FontAwesomeIcon icon={caretdown} className="vote" onClick={this.vote.bind(this, "downvote")}/>
-
-          </div>
+          { voteBtns }
           <div className="media-content">
             <div className="content">
               <p>
