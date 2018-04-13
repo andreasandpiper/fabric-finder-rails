@@ -1,3 +1,24 @@
-<%= user_signed_in? %>
 
-<%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+<h1>Post</h1>
+
+<%= form_for @post, html: { multipart: true } do |f| %>
+
+  <div class="form-group">
+    <%= f.label :image %>
+    <%= text_field :image,  placeholder: "image title"  %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :imagefile %>
+    <%= f.file_field :imagefile, accept: 'image/jpeg,image/gif,image/png,image/jpg'  %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :description %>
+    <%= text_field :description,  placeholder: "image description"  %>
+  </div>
+
+  <div class="form-group">
+        <%= f.submit 'Upload Photo' %>
+    </div>
+<% end %>
