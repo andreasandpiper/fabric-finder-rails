@@ -5,7 +5,6 @@ class User < ApplicationRecord
   #Virtual attribute to authenticate by email or username
   attr_accessor :login, :gravatar
   validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true
-  validates :validate_username, presence: true 
   has_many :posts, dependent: :destroy
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable 

@@ -7,7 +7,6 @@ class Post < ApplicationRecord
   }
 
   default_scope -> { order(created_at: :desc) }
-  validates :image,  presence: true
   validates :description, presence: true, length: { maximum: 1000 } 
   validates_attachment_content_type :imagefile, :content_type => /\Aimage\/.*\Z/
   attr_accessor :comment_count

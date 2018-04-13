@@ -23,7 +23,6 @@ class PostForm extends Component{
     let fileData = new FormData();
 
     fileData.append('imagefile', this.state.file); 
-    fileData.append('image', this.state.image)
     fileData.append('description', this.state.description)
 
     for(var pair of fileData.entries()) {
@@ -41,7 +40,6 @@ class PostForm extends Component{
     const { name, value } = event.target;
 
     let newState = {
-      image: this.state.image,
       description: this.state.description,
       file: this.state.file
     }
@@ -60,12 +58,6 @@ class PostForm extends Component{
     }
     return (
       <form onSubmit={this.handleSubmit} encType="multipart/form-data" className="column is-one-third is-offset-one-third">
-        <div className="field">
-          <label className="label">Fabric Image</label>
-          <div className="control">
-            <input className="input" type="text" name="image" value={this.state.image} onChange={this.handleChange} placeholder="Image URL"/>
-          </div>
-        </div>
         <div className="field">
           <label className="label">Upload image</label>
           <div className="control">
