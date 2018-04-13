@@ -7,7 +7,7 @@ import logged_in from '../HOC/user_status';
 class PostForm extends Component{
   constructor(props){
     super(props);
-    this.state = { id: null, image: '', description: '', redirect: false}
+    this.state = { id: null, image: '', description: '', file: '', redirect: false}
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -20,6 +20,7 @@ class PostForm extends Component{
 
   handleSubmit(event){
     event.preventDefault();
+    console.log(this.state)
     let dataObject = {};
     dataObject.data = JSON.stringify({image: this.state.image, description: this.state.description})
     axios({method: 'post', url: '/posts.json', data: dataObject}).then(resp => {
@@ -31,12 +32,12 @@ class PostForm extends Component{
 
   handleChange(event){
     const { name, value } = event.target;
-    
+
     let newState = {
       image: this.state.image,
-      description: this.state.description
+      description: this.state.description,
+      file: this.state.file
     }
-
     newState[name] = value
     this.setState(newState);
   }
@@ -52,6 +53,12 @@ class PostForm extends Component{
           <label className="label">Fabric Image</label>
           <div className="control">
             <input className="input" type="text" name="image" value={this.state.image} onChange={this.handleChange} placeholder="Image URL"/>
+          </div>
+        </div>
+        <div className="field">
+          <label className="label">Upload image</label>
+          <div className="control">
+            <input className="input" type="file" name="file" value={this.state.file} onChange={this.handleChange} placeholder="Image Upload"/>
           </div>
         </div>
 
