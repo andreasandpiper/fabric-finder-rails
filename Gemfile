@@ -20,6 +20,8 @@ gem 'rack-cors'
 gem 'devise'
 gem 'bulma-rails', '~> 0.6.2'
 gem 'active_model_serializers'
+gem 'paperclip'
+gem 'aws-sdk', '~> 2.3'
 
 group :development, :test do
   gem 'sqlite3', '1.3.13'

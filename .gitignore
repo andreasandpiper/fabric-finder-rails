@@ -22,3 +22,5 @@ public/app/bundle.js
 /yarn-error.log
 
 .byebug_history
+
+/config/local_env.yml
