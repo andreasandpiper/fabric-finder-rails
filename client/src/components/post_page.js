@@ -20,6 +20,7 @@ class PostPage extends Component{
 
   componentDidMount(){    
     axios.get(`/posts/${this.props.match.params.id}.json`).then(resp => {
+      console.log(resp)
       this.setState({...this.state, post: resp.data, user: resp.data.user})
     }).catch(err => {
       console.log(err)
@@ -38,7 +39,7 @@ class PostPage extends Component{
     let deleteBtn = null; 
     let userLink = `/user/${this.state.user.id}`;
 
-    const { created_at, description, image, user_name, id, user_id } = this.state.post; 
+    const { created_at, description, image, user_name, id, user_id, imagefile } = this.state.post; 
     const { gravatar, username } = this.state.user; 
     const delete_route = "/posts/" + id; 
 
@@ -50,7 +51,7 @@ class PostPage extends Component{
       <div className="container">
         <div className="columns">
           <div className="column is-one-third">
-            <img src={ image } alt="fabric image" />
+            <img src={ imagefile } alt="fabric image" />
           </div>
           <div className="column">
             <div className="columns">

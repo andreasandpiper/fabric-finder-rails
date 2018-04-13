@@ -1,5 +1,5 @@
 class PostSerializer < ActiveModel::Serializer
-  attributes :id, :description, :image, :created_at, :comment_count,:user_id, :time
+  attributes :id, :description, :image, :created_at, :comment_count,:user_id, :time, :imagefile
 
   has_one :user
 

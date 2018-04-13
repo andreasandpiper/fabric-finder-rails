@@ -1,14 +1,13 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, only: [:destroy, :create]
-    
+
   def index
     posts = Post.all
     render json: posts, include: "*.*"
   end
 
   def create 
-    post_data = JSON.parse params[:data]
-    post = current_user.posts.create(post_data)
+    post = current_user.posts.create(post_params)
     render json: post
   end 
 
@@ -29,7 +28,7 @@ class PostsController < ApplicationController
   private 
 
   def post_params 
-    params.require(post_data).permit(:image, :description)
+    params.permit(:image, :description, :imagefile)
   end
 
 end
