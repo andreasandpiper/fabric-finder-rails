@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import FontAwesomeIcon from '@fortawesome/react-fontawesome/index'
-import faSpinner from  '@fortawesome/fontawesome-free-solid/faSpinner';
 import { Redirect } from 'react-router-dom';
 import logged_in from '../HOC/user_status';
+import FontAwesomeIcon from '@fortawesome/react-fontawesome/index'
+import faSpinner from  '@fortawesome/fontawesome-free-solid/faSpinner';
+import defaultImg from '../assets/images/defaultimg.jpg';
+
 
 
 class PostForm extends Component{
@@ -74,6 +76,9 @@ class PostForm extends Component{
       return;
     }
 
+    var imagepreview = document.querySelector('#image-preview img');
+    imagepreview.src = URL.createObjectURL(event.target.files[0]);
+
     this.setState({...this.state, fileError: '', file: event.target.files[0], filename: event.target.value})
   }
 
@@ -90,29 +95,32 @@ class PostForm extends Component{
       return <Redirect to={path}/>
     }
     return (
-      <form onSubmit={this.handleSubmit} encType="multipart/form-data" className="column is-one-third is-offset-one-third">
-        <div className="field">
-          <label className="label">Upload image</label>
-          <div className="control">
-            <input className="input" type="file" name="file" value={filename} onChange={this.fileChange.bind(this)} placeholder="Image Upload"/>
+        <form onSubmit={this.handleSubmit} encType="multipart/form-data" className="column is-one-third is-offset-one-third">
+          <div id='image-preview'>
+            <img src={defaultImg}/>
           </div>
-          <p className="help is-danger">{ fileError }</p>
-        </div>
+          <div className="field">
+            <label className="label">Upload image</label>
+            <div className="control">
+              <input className="input" type="file" name="file" value={filename} onChange={this.fileChange.bind(this)} placeholder="Image Upload"/>
+            </div>
+            <p className="help is-danger">{ fileError }</p>
+          </div>
 
-        <div className="field">
-          <label className="label">Description</label>
-          <div className="control">
-            <input className="textarea" type="text" name="description" value={description} onChange={this.handleChange} placeholder="Describe your fabric here"/>
+          <div className="field">
+            <label className="label">Description</label>
+            <div className="control">
+              <input className="textarea" type="text" name="description" value={description} onChange={this.handleChange} placeholder="Describe your fabric here"/>
+            </div>
+            <p className="help is-danger">{ descriptionError }</p>
           </div>
-          <p className="help is-danger">{ descriptionError }</p>
-        </div>
 
-        <div className="field is-grouped">
-          <div className="control">
-            <button className="button is-link">{ submit }</button>
+          <div className="field is-grouped">
+            <div className="control">
+              <button className="button is-link">{ submit }</button>
+            </div>
           </div>
-        </div>
-      </form>
+        </form>
     )
   }
 }
