@@ -8,7 +8,7 @@ class Home extends Component {
 
     this.state = {
       posts: [],
-      pages: 1,
+      totalPages: 1,
       current_page: 1
     }
   }
@@ -18,39 +18,76 @@ class Home extends Component {
   }
 
   getNextPosts(id){
-    if(id < 1 || id > this.state.pages){
+    if(id < 1 || id > this.state.totalPages){
       return;
     }
     axios.get(`/posts?page=${id}`).then(resp => {
       console.log(resp)
       
-      this.setState({posts: resp.data, current_page: id, pages: Math.ceil(resp.headers.total/resp.headers['per-page'])})
+      this.setState({posts: resp.data, current_page: id, totalPages: Math.ceil(resp.headers.total/resp.headers['per-page'])})
     }).catch(err => {
       console.log(err)
     })
   }
 
-  render(){
-    console.log(this.state)
-
-    let signUpBtn = null; 
+  pagination(){
+    var index = 1; 
+    const { totalPages, current_page } = this.state; 
     let pagination = [];
-    var page = 1; 
-    while(page <= this.state.pages){
-      let link = `/posts?page=${page}`;
-      let classlist = "pagination-link";
+    let currentpage = current_page; 
+    let pagesize = totalPages < 10 ? totalPages : 10;
+    let startPage = null; 
+    let endPage = null; 
 
-      if(page == this.state.current_page){
-        classlist += " is-current";
-      }
-      pagination.push( 
-        <li key={page} onClick={ this.getNextPosts.bind(this, page)}>
-          <p className={ classlist }>{ page }</p>
-        </li>
-      )
-      page++; 
+    if (totalPages <= pagesize) {
+      startPage = 1;
+      endPage = totalPages;
+    } else {
+        if (current_page <= 6) {
+            startPage = 1;
+            endPage = 10;
+        } else if (current_page + 4 >= totalPages) {
+            startPage = totalPages - 9;
+            endPage = totalPages;
+        } else {
+            startPage = current_page - 5;
+            endPage = current_page + 4;
+        }
     }
 
+    let firstpage = this.createPageLink(index++, 1, "First");
+    let lastPage = this.createPageLink(index++, totalPages, "Last");
+    let previousPage = this.createPageLink(index++,  current_page - 1, 'Previous' );
+    let nextPage = this.createPageLink(index++,  current_page + 1, 'Next' ); 
+
+    pagination.push(firstpage, previousPage);
+
+    while(startPage <= endPage){
+      let page = this.createPageLink(index++, startPage, startPage);
+      startPage++; 
+      pagination.push(page);
+    }
+
+    pagination.push(nextPage, lastPage); 
+
+    return pagination;
+  }
+
+  createPageLink(index, page, text){
+    var classlist = "pagination-link";
+    if(page == this.state.current_page && !isNaN(text)){
+      classlist += " is-current";
+    }
+    return (
+      <li key={index} onClick={ this.getNextPosts.bind(this, page)}>
+        <p className={ classlist }>{ text }</p>
+      </li>
+    )
+  }
+
+  render(){
+    let signUpBtn = null; 
+    const pagination = this.pagination();
 
     if(!localStorage.getItem("user_id")){
       signUpBtn = <a href="/users/sign_up" className="button is-white">Sign Up</a> 
@@ -70,17 +107,13 @@ class Home extends Component {
             </div>
           </section>
         <div className= "container">
-          <nav className="pagination" role="navigation" aria-label="pagination">
-            <a className="pagination-previous" onClick={this.getNextPosts.bind(this, this.state.current_page - 1)}>Previous</a>
-            <a className="pagination-next" onClick={this.getNextPosts.bind(this, this.state.current_page + 1)}>Next page</a>
+          <nav className="pagination is-centered" role="navigation" aria-label="pagination">
             <ul className="pagination-list">
               { pagination }
             </ul>
           </nav>
           <Feed data={this.state.posts}/>
-          <nav className="pagination" role="navigation" aria-label="pagination">
-            <a className="pagination-previous" onClick={this.getNextPosts.bind(this, this.state.current_page - 1)}>Previous</a>
-            <a className="pagination-next" onClick={this.getNextPosts.bind(this, this.state.current_page + 1)}>Next page</a>
+          <nav className="pagination is-centered" role="navigation" aria-label="pagination">
             <ul className="pagination-list">
               { pagination }
             </ul>
