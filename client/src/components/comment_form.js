@@ -7,7 +7,8 @@ class CommentForm extends Component{
 
     this.state = {
       content: "",
-      post_id: this.props.post_id
+      post_id: this.props.post_id,
+      commentSubmitted: false
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -27,16 +28,22 @@ class CommentForm extends Component{
   handleSubmit(event){
     event.preventDefault();
 
+    if(this.state.commentSubmitted){
+      return
+    }
+
     const data = {
       data: this.state 
     }
     
     axios.post('/comments', data ).then(resp => {
       this.props.add();
-      this.setState({...this.state, content: ''})
+      this.setState({...this.state, content: '', commentSubmitted: false})
     }).catch(err => {
       console.log(err)
+      this.setState({...this.state, commentSubmitted: false})
     })
+    this.setState({...this.state, commentSubmitted: true})
   }
 
   render(){
