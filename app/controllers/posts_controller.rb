@@ -3,7 +3,7 @@ class PostsController < ApplicationController
 
   def index
     posts = Post.all
-    render json: posts, include: "*.*"
+    paginate json: posts, per_page: 10  
   end
 
   def create 

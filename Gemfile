@@ -23,6 +23,8 @@ gem 'active_model_serializers'
 gem 'paperclip'
 gem 'aws-sdk-s3', '~> 1'
 gem 'aws-sdk-ec2', '~> 1'
+gem 'will_paginate'
+gem 'api-pagination'
 
 group :development, :test do
   gem 'sqlite3', '1.3.13'
