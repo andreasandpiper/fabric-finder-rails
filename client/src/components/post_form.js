@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import FontAwesomeIcon from '@fortawesome/react-fontawesome/index'
+import faSpinner from  '@fortawesome/fontawesome-free-solid/faSpinner';
 import { Redirect } from 'react-router-dom';
 import logged_in from '../HOC/user_status';
 
@@ -7,7 +9,15 @@ import logged_in from '../HOC/user_status';
 class PostForm extends Component{
   constructor(props){
     super(props);
-    this.state = { id: null, description: '', file: '', filename: '', postsubmitted: false, redirect: false}
+    this.state = { id: null, 
+      description: '', 
+      file: '', 
+      filename: '', 
+      postsubmitted: false, 
+      redirect: false, 
+      fileError: '',
+      descriptionError: ''
+  }
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -20,13 +30,15 @@ class PostForm extends Component{
 
   handleSubmit(event){
     event.preventDefault();
-    if(this.state.postsubmitted || this.state.description == '' || this.state.file ==''){
-      return; 
+    const { file, description } = this.state; 
+    if(this.state.postsubmitted || file == '' || description == ''){
+      return;
     }
+
     let fileData = new FormData();
 
-    fileData.append('imagefile', this.state.file); 
-    fileData.append('description', this.state.description)
+    fileData.append('imagefile', file); 
+    fileData.append('description', description)
 
     for(var pair of fileData.entries()) {
       console.log(pair[0]+ ', '+ pair[1]); 
@@ -45,7 +57,7 @@ class PostForm extends Component{
   handleChange(event){
     const { name, value } = event.target;
 
-    let newState = {
+    let newState = {...this.state, 
       description: this.state.description,
       file: this.state.file
     }
@@ -58,14 +70,21 @@ class PostForm extends Component{
     var ifImage = (/\.(gif|jpg|jpeg|png)$/i).test(value)
     console.log(ifImage)
     if(!ifImage){
-      //include client text about image type
+      this.setState({...this.state, fileError: 'Please use .jpg, .jpeg, .png, or .gif image formats'})
       return;
     }
 
-    this.setState({...this.state, file: event.target.files[0], filename: event.target.value})
+    this.setState({...this.state, fileError: '', file: event.target.files[0], filename: event.target.value})
   }
 
   render(){
+    const { filename, description, fileError, descriptionError} = this.state; 
+    let submit = "Submit"; 
+
+    if(this.state.postsubmitted){
+      submit = <FontAwesomeIcon className='fa-spin' icon={ faSpinner} />
+    }
+
     if(this.state.redirect){
       let path = "/post/" + this.state.id;
       return <Redirect to={path}/>
@@ -75,20 +94,22 @@ class PostForm extends Component{
         <div className="field">
           <label className="label">Upload image</label>
           <div className="control">
-            <input className="input" type="file" name="file" value={this.state.filename} onChange={this.fileChange.bind(this)} placeholder="Image Upload"/>
+            <input className="input" type="file" name="file" value={filename} onChange={this.fileChange.bind(this)} placeholder="Image Upload"/>
           </div>
+          <p className="help is-danger">{ fileError }</p>
         </div>
 
         <div className="field">
           <label className="label">Description</label>
           <div className="control">
-            <input className="textarea" type="text" name="description" value={this.state.description} onChange={this.handleChange} placeholder="Describe your fabric here"/>
+            <input className="textarea" type="text" name="description" value={description} onChange={this.handleChange} placeholder="Describe your fabric here"/>
           </div>
+          <p className="help is-danger">{ descriptionError }</p>
         </div>
 
         <div className="field is-grouped">
           <div className="control">
-            <button className="button is-link">Submit</button>
+            <button className="button is-link">{ submit }</button>
           </div>
         </div>
       </form>
