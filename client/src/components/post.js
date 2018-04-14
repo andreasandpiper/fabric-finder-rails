@@ -21,9 +21,9 @@ class Post extends Component{
       user_image = <img src={gravatar} alt="Image"/>
     }
 
-    if(user_id == localStorage.getItem("user_id")){
-      deleteBtn = <button className="button is-danger is-outlined">Delete</button>
-    }
+    // if(user_id == localStorage.getItem("user_id")){
+    //   deleteBtn = <button className="button is-danger is-outlined">Delete</button>
+    // }
   
     return (    
         <article className="media">
