@@ -7,7 +7,7 @@ import logged_in from '../HOC/user_status';
 class PostForm extends Component{
   constructor(props){
     super(props);
-    this.state = { id: null, image: '', description: '', file: '', filename: '', postsubmitted: false, redirect: false}
+    this.state = { id: null, description: '', file: '', filename: '', postsubmitted: false, redirect: false}
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -20,8 +20,7 @@ class PostForm extends Component{
 
   handleSubmit(event){
     event.preventDefault();
-    console.log(this.state)
-    if(this.state.postsubmitted){
+    if(this.state.postsubmitted || this.state.description == '' || this.state.file ==''){
       return; 
     }
     let fileData = new FormData();
@@ -55,6 +54,14 @@ class PostForm extends Component{
   }
 
   fileChange(event){
+    const { value } = event.target; 
+    var ifImage = (/\.(gif|jpg|jpeg|png)$/i).test(value)
+    console.log(ifImage)
+    if(!ifImage){
+      //include client text about image type
+      return;
+    }
+
     this.setState({...this.state, file: event.target.files[0], filename: event.target.value})
   }
 
