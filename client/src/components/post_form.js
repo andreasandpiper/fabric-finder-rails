@@ -7,7 +7,7 @@ import logged_in from '../HOC/user_status';
 class PostForm extends Component{
   constructor(props){
     super(props);
-    this.state = { id: null, image: '', description: '', file: '', filename: '', redirect: false}
+    this.state = { id: null, image: '', description: '', file: '', filename: '', postsubmitted: false, redirect: false}
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -20,6 +20,10 @@ class PostForm extends Component{
 
   handleSubmit(event){
     event.preventDefault();
+    console.log(this.state)
+    if(this.state.postsubmitted){
+      return; 
+    }
     let fileData = new FormData();
 
     fileData.append('imagefile', this.state.file); 
@@ -29,11 +33,14 @@ class PostForm extends Component{
       console.log(pair[0]+ ', '+ pair[1]); 
    }
 
+
     axios({method: 'post', url: '/posts.json', data: fileData, headers: {'Content-Type': 'multipart/form-data'}}).then(resp => {
-      this.setState({...this.state, id: resp.data.id, redirect: true})
+      this.setState({...this.state, id: resp.data.id, redirect: true, postsubmitted: false})
     }).catch( err => {
       console.log(err)
+      this.setState({...this.state, postsubmitted: false})
     })
+    this.setState({...this.state, postsubmitted: true})
   }
 
   handleChange(event){
