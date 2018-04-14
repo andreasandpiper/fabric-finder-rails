@@ -6,7 +6,7 @@ class Post < ApplicationRecord
     medium: '300x300>'
   }
 
-  scope :by_date, -> { order(created_at: :desc) }
+  default_scope -> { order(created_at: :desc) }
   validates :description, presence: true, length: { maximum: 1000 } 
   validates_attachment_content_type :imagefile, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
   attr_accessor :comment_count

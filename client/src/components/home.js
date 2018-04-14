@@ -14,24 +14,38 @@ class Home extends Component {
   }
 
   componentDidMount(){
-    axios.get(`/posts?page=${this.state.current_page}`).then(resp => {
+    this.getNextPosts(this.state.current_page);
+  }
+
+  getNextPosts(id){
+    if(id < 1 || id > this.state.pages){
+      return;
+    }
+    axios.get(`/posts?page=${id}`).then(resp => {
       console.log(resp)
       
-      this.setState({posts: resp.data, pages: Math.ceil(resp.headers.total/resp.headers['per-page'])})
+      this.setState({posts: resp.data, current_page: id, pages: Math.ceil(resp.headers.total/resp.headers['per-page'])})
     }).catch(err => {
       console.log(err)
     })
   }
 
   render(){
+    console.log(this.state)
+
     let signUpBtn = null; 
     let pagination = [];
     var page = 1; 
     while(page <= this.state.pages){
       let link = `/posts?page=${page}`;
+      let classlist = "pagination-link";
+
+      if(page == this.state.current_page){
+        classlist += " is-current";
+      }
       pagination.push( 
-        <li key={page}>
-          <p className="pagination-link">{ page }</p>
+        <li key={page} onClick={ this.getNextPosts.bind(this, page)}>
+          <p className={ classlist }>{ page }</p>
         </li>
       )
       page++; 
@@ -56,12 +70,14 @@ class Home extends Component {
             </div>
           </section>
         <div className= "container">
+          <Feed data={this.state.posts}/>
           <nav className="pagination" role="navigation" aria-label="pagination">
+            <a className="pagination-previous" onClick={this.getNextPosts.bind(this, this.state.current_page - 1)}>Previous</a>
+            <a className="pagination-next" onClick={this.getNextPosts.bind(this, this.state.current_page + 1)}>Next page</a>
             <ul className="pagination-list">
               { pagination }
             </ul>
           </nav>
-          <Feed data={this.state.posts}/>
         </div>
       </div>
     )
