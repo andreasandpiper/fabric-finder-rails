@@ -70,6 +70,13 @@ class Home extends Component {
             </div>
           </section>
         <div className= "container">
+          <nav className="pagination" role="navigation" aria-label="pagination">
+            <a className="pagination-previous" onClick={this.getNextPosts.bind(this, this.state.current_page - 1)}>Previous</a>
+            <a className="pagination-next" onClick={this.getNextPosts.bind(this, this.state.current_page + 1)}>Next page</a>
+            <ul className="pagination-list">
+              { pagination }
+            </ul>
+          </nav>
           <Feed data={this.state.posts}/>
           <nav className="pagination" role="navigation" aria-label="pagination">
             <a className="pagination-previous" onClick={this.getNextPosts.bind(this, this.state.current_page - 1)}>Previous</a>
