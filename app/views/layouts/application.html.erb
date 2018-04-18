@@ -10,10 +10,18 @@
 
   <body>
     <%= render 'layouts/navbar' %>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <div class="columns">
-      <%= yield %>
+    <div class="container">
+      <div class="columns">
+        <div class="column">
+          <p class="notice"><%= notice %></p>
+          <p class="alert"><%= alert %></p>
+        </div>
+      </div>
+      <div class="columns">
+        <div class="column is-one-fifth is-offset-two-fifths">
+          <%= yield %>
+        </div>
+      </div>
     </div>
   </body>
 </html>

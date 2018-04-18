@@ -1,11 +1,11 @@
-class ConfirmationsController < Devise::ConfirmationsController
+class ConfirmationsController < Devise::ConfirmationsController 
 
-  def show
-
+  def show 
   end 
-
+  
   private
   def after_confirmation_path_for(resource_name, resource)
     sign_in(resource)
+    user_confirmation_path
   end
 end

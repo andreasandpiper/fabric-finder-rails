@@ -22,3 +22,7 @@
  $navbar-item-hover-color: $turquoise;
 
  @import "bulma";
+
+ body > .container {
+   margin-top: 2%; 
+ }
