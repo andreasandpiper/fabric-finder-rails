@@ -7,11 +7,10 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 5.times do |n|
-  name  = Faker::Name.name
-  username = name
   email = "test-#{n+1}@fabric.org"
   password = "password"
   user = User.new( email: email,
+                username: "test#{n+1}",
                 password:              password,
                 password_confirmation: password)
   user.skip_confirmation!
