@@ -3,8 +3,9 @@ class Post < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_attached_file :imagefile, styles: {
     thumb: '100x100>',
-    medium: '300x300>'
-  }
+    medium: '300x300>',
+    large: '500x500#'
+  }, :default_style => :large
 
   default_scope -> { order(created_at: :desc) }
   validates :description, presence: true, length: { maximum: 1000 } 

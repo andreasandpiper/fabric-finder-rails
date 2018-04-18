@@ -11,14 +11,16 @@
   username = name
   email = "test-#{n+1}@fabric.org"
   password = "password"
-  User.create!( email: email,
+  user = User.new( email: email,
                 password:              password,
                 password_confirmation: password)
+  user.skip_confirmation!
+  user.save!
 end
 
 # Create posts
 users = User.order(:created_at).take(6)
-20.times do |n|
+5.times do |n|
   image = File.new("test/fixtures/files/birds.jpg")
   description = Faker::RickAndMorty.quote
   users.each { |user| user.posts.create!(imagefile: image, description: description) }

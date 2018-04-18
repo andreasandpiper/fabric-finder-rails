@@ -19,6 +19,7 @@ class PostsController < ApplicationController
   def destroy 
     post = Post.find(params[:id])
     if current_user.id == post.user_id
+      post.imagefile.destroy
       return post.destroy
     else 
       return head :unauthorized
