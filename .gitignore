@@ -24,3 +24,6 @@ public/app/bundle.js
 .byebug_history
 
 /config/local_env.yml
+
+# Ignore application configuration
+/config/application.yml
