@@ -35,24 +35,14 @@ class Profile extends Component {
     return (
       <div className="container">
         <div className="columns">
-          <div className="column is-one-quarter">
-          <div className="card">
-          <div className="card-image">
-            <figure className="image is-4by3">
-              <img src={gravatar} alt="gravatar image"/>
-            </figure>
-          </div>
-          <div className="card-content">
-            <div className="media">
-              <div className="media-content">
+          <div className="column is-one-fifth">
+              <figure className="image is-2by2">
+                <img src={gravatar} alt="gravatar image"/>
+              </figure>
                 <p className="title is-4">{ username } </p>
-              </div>
-            </div>
+                { account_settings }
           </div>
-        </div>
-        { account_settings }
-      </div>
-          <div className="column is-three-quarters">
+          <div className="column is-four-fifths">
             <Feed data={this.state.posts}/>
           </div>
         </div>
