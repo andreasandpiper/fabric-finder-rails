@@ -9,7 +9,7 @@ class User < ApplicationRecord
   validates_uniqueness_of :username
   has_many :posts, dependent: :destroy
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, :confirmable 
+         :recoverable, :rememberable, :trackable, :validatable 
 
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup
