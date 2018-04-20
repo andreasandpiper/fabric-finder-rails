@@ -6,6 +6,7 @@ class User < ApplicationRecord
   attr_accessor :login, :gravatar
   validate :validate_username
   validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true
+  validates_uniqueness_of :username
   has_many :posts, dependent: :destroy
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable 
