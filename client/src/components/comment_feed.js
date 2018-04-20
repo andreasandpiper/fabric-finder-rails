@@ -37,9 +37,12 @@ class CommentFeed extends Component {
     let commentsForm = null; 
     const { comments } = this.state;
 
-    const commentComponents = comments.map((item, index) => {
+    let commentComponents = comments.map((item, index) => {
       return <Comment key={index} comment={item} time={this.state.DB_time} getNew={this.getComments.bind(this)} />
     })
+
+    console.log(commentComponents.length)
+    let ifComments = commentComponents.length == 0 ? "Looks like there are no comments yet!" : "";
 
     if(this.state.user_id){
       commentsForm = <CommentForm post_id={this.state.post_id } add={this.getComments.bind(this)}/>
@@ -50,6 +53,7 @@ class CommentFeed extends Component {
         { commentsForm }
         <h4 className="has-text-centered has-text-weight-bold is-size-4">Comments</h4>
         { commentComponents }
+        <p className="has-text-centered">{ ifComments }</p>
       </div>
     )
   }

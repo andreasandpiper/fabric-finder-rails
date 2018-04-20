@@ -1,19 +1,21 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<h2 class="title is-2 has-text-centered">Edit Profile Settings</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= devise_error_messages! %>
 
-  <a href="http://gravatar.com/emails" target="_blank" rel="noopener">change</a>
-
-  <%= image_tag(resource.gravatar, alt: resource.username, class: "gravatar" ) %>
+  <div class="has-text-centered">
+    <a href="http://gravatar.com/emails" target="_blank" rel="noopener" class="change-grav">    
+    <%= image_tag(resource.gravatar, alt: resource.username, class: "gravatar" ) %>
+    </a>
+  </div>
   <div class="field">
     <%= f.label :username %><br />
-    <%= f.text_field :username, autofocus: true, autocomplete: "username" %>
+    <%= f.text_field :username, class: "input", autofocus: true, autocomplete: "username" %>
   </div>
 
   <div class="field">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.email_field :email, class: "input",  autofocus: true, autocomplete: "email" %>
   </div>
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
@@ -22,7 +24,7 @@
 
   <div class="field">
     <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "off" %>
+    <%= f.password_field :password, autocomplete: "off", class: "input" %>
     <% if @minimum_password_length %>
       <br />
       <em><%= @minimum_password_length %> characters minimum</em>
@@ -31,21 +33,21 @@
 
   <div class="field">
     <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+    <%= f.password_field :password_confirmation, autocomplete: "off", class: "input" %>
   </div>
 
   <div class="field">
     <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "off" %>
+    <%= f.password_field :current_password, autocomplete: "off", class: "input" %>
   </div>
 
   <div class="actions">
-    <%= f.submit "Update" %>
+    <%= f.submit "Update", class: "button is-primary" %>
   </div>
 <% end %>
 
-<h3>Cancel my account</h3>
+<hr>
 
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+<p><%= button_to "Cancel my account", registration_path(resource_name), class: "button is-danger", data: { confirm: "Are you sure?" }, method: :delete %></p>
 
-<%= link_to "Back", :back %>
+<%= link_to "Back",  :back %>

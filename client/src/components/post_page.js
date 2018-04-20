@@ -55,7 +55,7 @@ class PostPage extends Component{
           </div>
           <div className="column">
             <div className="columns">
-              <div className="column is-two-thirds">
+              <div className="column is-two-thirds is-vertical-center">
                 <p>{ description }</p>
               </div>
               <div className="column has-text-right is-one-third">
