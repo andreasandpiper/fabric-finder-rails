@@ -5,7 +5,7 @@ class Post < ApplicationRecord
     thumb: '100x100>',
     medium: '300x300>',
     large: '500x500#'
-  }, :default_style => :large
+  }, :default_style => :medium
 
   default_scope -> { order(created_at: :desc) }
   validates :description, presence: true, length: { maximum: 1000 } 
