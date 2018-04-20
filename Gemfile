@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '~> 5.1.4'
-ruby '2.3.4'
+ruby '2.3.3'
 gem 'puma', '~> 3.7'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
@@ -21,11 +21,11 @@ gem 'aws-sdk-s3', '~> 1'
 gem 'aws-sdk-ec2', '~> 1'
 gem 'will_paginate'
 gem 'api-pagination'
-gem 'figaro'
 
 group :development, :test do
   gem 'sqlite3', '1.3.13'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'figaro'
 end
 
 group :development do
