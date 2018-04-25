@@ -24,6 +24,12 @@ h1 {
   align-items: center;
 }
 
+.wrapper {
+  padding-bottom: 200px; /* height of footer */
+  position: relative;
+  min-height: 100vh; 
+}
+
 /* Header */
 
 .navbar-burger span {
@@ -64,7 +70,9 @@ h1 {
 /* Footer  */
 
 footer {
-  /* position: absolute;
+  background-color: gray;
+  height: 200px;
+  position: absolute;
   bottom: 0;
-  width: 100%; */
+  width: 100%;
 }

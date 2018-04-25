@@ -16,7 +16,7 @@ const App = () => (
         <Route path="/user/:id" component={Profile}/>
         <Route exact path="/post" component={PostForm}/>
         <Route path="/post/:id" component={Post} />
-        {/* <Footer /> */}
+        <Footer />
     </div>
 
 );
