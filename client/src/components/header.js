@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import Home from './home';
+import Fabric from './fabric';
 
 class Header extends Component{
   constructor(props){
@@ -43,6 +44,8 @@ class Header extends Component{
             <nav className="navbar" role="navigation" aria-label="dropdown navigation">
               <div className="navbar-brand">
                 <Link to="/" className="navbar-item">Home</Link>
+                <Link to="/fabric" className="navbar-item">Fabric</Link>
+
                 <div onClick={this.openMenu.bind(this)} className={this.state.mobile_state ? 'navbar-burger is-active' : 'navbar-burger'} data-target="navMenu">
                   <span></span>
                   <span></span>
@@ -65,6 +68,7 @@ class Header extends Component{
           <nav className="navbar" role="navigation" aria-label="dropdown navigation">
             <div className="navbar-brand">
               <Link to="/" className="navbar-item">Home</Link>
+              <Link to="/fabric" className="navbar-item">Fabric</Link>
               <div onClick={this.openMenu.bind(this)} className={this.state.mobile_state ? 'navbar-burger is-active' : 'navbar-burger'} data-target="navMenu">
                 <span></span>
                 <span></span>
@@ -73,6 +77,7 @@ class Header extends Component{
             </div>
             <div className={this.state.mobile_state ? 'navbar-menu is-active' : 'navbar-menu'} id="navMenu">
               <div className="navbar-end">
+                <a href="/users/sign_up" className="navbar-item">Sign Up</a>  
                 <a href="/users/sign_in" className="navbar-item">Login</a>  
               </div>
             </div>

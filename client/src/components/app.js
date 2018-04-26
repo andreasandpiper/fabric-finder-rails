@@ -7,12 +7,14 @@ import Profile from './profile';
 import Post from './post_page';
 import Footer from './footer';
 import PostForm from './post_form';
+import Fabric from './fabric';
 
 
 const App = () => (
     <div className="wrapper">
         <Header />
         <Route exact path="/" component={Home}/>
+        <Route exact path="/fabric" component={Fabric}/>
         <Route path="/user/:id" component={Profile}/>
         <Route exact path="/post" component={PostForm}/>
         <Route path="/post/:id" component={Post} />

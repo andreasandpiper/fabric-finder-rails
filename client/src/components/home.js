@@ -1,93 +1,29 @@
 import React, { Component } from 'react';
 import Feed from './post_feed';
 import axios from 'axios';
-
+import fabricSample from '../assets/images/fabricpeice.png';
+import spool from '../assets/images/spool.jpg';
+import person from '../assets/images/person.jpg';
 class Home extends Component {
   constructor(props){
     super(props);
 
     this.state = {
-      posts: [],
-      totalPages: 1,
-      current_page: 1
+      cartoonClass: 'column'
     }
   }
 
   componentDidMount(){
-    this.getNextPosts(this.state.current_page);
+    window.addEventListener('scroll', this.scrollEvent.bind(this));
   }
 
-  getNextPosts(id){
-    if(id < 1 || id > this.state.totalPages){
-      return;
-    }
-    axios.get(`/posts?page=${id}`).then(resp => {
-      console.log(resp)
-      
-      this.setState({posts: resp.data, current_page: id, totalPages: Math.ceil(resp.headers.total/resp.headers['per-page'])})
-    }).catch(err => {
-      console.log(err)
-    })
-  }
-
-  pagination(){
-    var index = 1; 
-    const { totalPages, current_page } = this.state; 
-    let pagination = [];
-    let currentpage = current_page; 
-    let pagesize = totalPages < 10 ? totalPages : 10;
-    let startPage = null; 
-    let endPage = null; 
-
-    if (totalPages <= pagesize) {
-      startPage = 1;
-      endPage = totalPages;
-    } else {
-        if (current_page <= 6) {
-            startPage = 1;
-            endPage = 10;
-        } else if (current_page + 4 >= totalPages) {
-            startPage = totalPages - 9;
-            endPage = totalPages;
-        } else {
-            startPage = current_page - 5;
-            endPage = current_page + 4;
-        }
-    }
-
-    let firstpage = this.createPageLink(index++, 1, "First");
-    let lastPage = this.createPageLink(index++, totalPages, "Last");
-    let previousPage = this.createPageLink(index++,  current_page - 1, 'Previous' );
-    let nextPage = this.createPageLink(index++,  current_page + 1, 'Next' ); 
-
-    pagination.push(firstpage, previousPage);
-
-    while(startPage <= endPage){
-      let page = this.createPageLink(index++, startPage, startPage);
-      startPage++; 
-      pagination.push(page);
-    }
-
-    pagination.push(nextPage, lastPage); 
-
-    return pagination;
-  }
-
-  createPageLink(index, page, text){
-    var classlist = "pagination-link";
-    if(page == this.state.current_page && !isNaN(text)){
-      classlist += " is-current";
-    }
-    return (
-      <li key={index} onClick={ this.getNextPosts.bind(this, page)}>
-        <p className={ classlist }>{ text }</p>
-      </li>
-    )
+  scrollEvent(){
+    this.setState({...this.state, cartoonClass: 'column fadeIn'});
   }
 
   render(){
+    const { cartoonClass } = this.state; 
     let signUpBtn = null; 
-    const pagination = this.pagination();
 
     if(!localStorage.getItem("user_id")){
       signUpBtn = <a href="/users/sign_up" className="button is-white">Sign Up</a> 
@@ -95,30 +31,41 @@ class Home extends Component {
     return (
       <div>
         <section className="hero is-primary">
-            <div className="hero-body">
+            <div className="hero-body is-vertical-center">
               <div className="container has-text-centered">
                 <h1 className="title">
                   Find My Fabric
                 </h1>
+                <h2>A community of fabric enthusiasts helping connect others to their dream fabrics.</h2>
                 <h2 className="subtitle">
                   { signUpBtn }
                 </h2>
               </div>
             </div>
           </section>
-        <div className= "container">
-          <nav className="pagination is-centered" role="navigation" aria-label="pagination">
-            <ul className="pagination-list">
-              { pagination }
-            </ul>
-          </nav>
-          <Feed data={this.state.posts}/>
-          <nav className="pagination is-centered" role="navigation" aria-label="pagination">
-            <ul className="pagination-list">
-              { pagination }
-            </ul>
-          </nav>
-        </div>
+        <section className="container">
+          <h1 className="has-text-centered">How does it work?</h1>
+          <hr/>
+          <div className="columns cartoons has-text-centered">
+            <div className={ cartoonClass }>
+              <img src={ fabricSample } />
+              <p>Last peice of fabric?</p>
+            </div>
+            <div className={ cartoonClass }>
+              <img src={ spool } />
+              <p>Post and Ask a Question</p>
+            </div>
+            <div className={ cartoonClass }>
+              <img src={ person } />
+              <p>Wait for comments and vote!</p>
+            </div>
+          </div>
+        </section>
+        <section className="home-tagline is-vertical-center">
+          <div className="container">
+            <h1 className="has-text-white">Ever run out of fabric and you searches online lead you nowhere? By creating a central source for all fabric related questions we bring our collaborative minds to help out. </h1>
+          </div>
+        </section>
       </div>
     )
   }
