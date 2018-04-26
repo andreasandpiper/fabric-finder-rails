@@ -8,4 +8,5 @@ Rails.application.routes.draw do
   get '/post/:id/comments', to: 'comments#get_comments'
   post '/comments/:id/upvote', to: 'votes#upvote'
   post '/comments/:id/downvote', to: 'votes#downvote'
+  get '/topten', to: 'posts#topTen'
 end

@@ -26,6 +26,12 @@ class PostsController < ApplicationController
     end
   end 
 
+  def topTen
+    #current last 10, will change to sort by number of comments
+    posts = Post.last(10)
+    render json: posts
+  end 
+
   private 
 
   def post_params 
