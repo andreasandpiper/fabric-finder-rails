@@ -55,6 +55,7 @@ h1 {
   background-image: url('../images/leaves.JPG');
   background-attachment: fixed;
   background-size: cover;
+  color: #ffffff;
 }
 .home-tagline {
   width: 100%;

@@ -1,20 +1,30 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import Feed from './post_feed';
 import axios from 'axios';
 import fabricSample from '../assets/images/fabricpeice.png';
 import spool from '../assets/images/spool.jpg';
 import person from '../assets/images/person.jpg';
+
 class Home extends Component {
   constructor(props){
     super(props);
 
     this.state = {
-      cartoonClass: 'column'
+      cartoonClass: 'column',
+      topPosts: []
     }
   }
 
   componentDidMount(){
-    window.addEventListener('scroll', this.scrollEvent.bind(this));
+    axios.get(`/topten`).then(resp => {
+      console.log(resp)
+      this.setState({...this.state, topPosts: resp.data});
+      window.addEventListener('scroll', this.scrollEvent.bind(this));
+    }).catch(err => {
+      console.log(err)
+      window.addEventListener('scroll', this.scrollEvent.bind(this));
+    })
   }
 
   scrollEvent(){
@@ -22,23 +32,26 @@ class Home extends Component {
   }
 
   render(){
-    const { cartoonClass } = this.state; 
+    const { cartoonClass, topPosts } = this.state; 
     let signUpBtn = null; 
+    let logInBtn = null; 
 
     if(!localStorage.getItem("user_id")){
       signUpBtn = <a href="/users/sign_up" className="button is-white">Sign Up</a> 
+      logInBtn = <a href="/users/sign_in" className="button is-white">Login</a>; 
     }
     return (
       <div>
-        <section className="hero is-primary">
+        <section className="hero">
             <div className="hero-body is-vertical-center">
               <div className="container has-text-centered">
-                <h1 className="title">
+                <h1 className="title has-text-white">
                   Find My Fabric
                 </h1>
-                <h2>A community of fabric enthusiasts helping connect others to their dream fabrics.</h2>
+                <h2>A community of fabric enthusiasts helping connect others to their dream textiles.</h2>
                 <h2 className="subtitle">
                   { signUpBtn }
+                  { logInBtn }
                 </h2>
               </div>
             </div>
@@ -61,9 +74,14 @@ class Home extends Component {
             </div>
           </div>
         </section>
+        <hr/>
+        <section className="container has-text-centered">
+          <Feed data={ topPosts }/>
+          <Link to="/fabric" className="button is-primary">Check out more fabric</Link> 
+        </section>
         <section className="home-tagline is-vertical-center">
           <div className="container">
-            <h1 className="has-text-white">Ever run out of fabric and you searches online lead you nowhere? By creating a central source for all fabric related questions we bring our collaborative minds to help out. </h1>
+            <h1 className="has-text-white">Ever run out of fabric and online searches lead you nowhere? By creating a central source for all fabric related questions we bring our collaborative minds to help each other out. </h1>
           </div>
         </section>
       </div>
