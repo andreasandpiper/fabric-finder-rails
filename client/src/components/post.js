@@ -21,6 +21,8 @@ class Post extends Component{
       user_image = <img src={gravatar} alt="Image"/>
     }
 
+    let comment_message = comment_count === 1 ? "comment" : "comments";
+
     // if(user_id == localStorage.getItem("user_id")){
     //   deleteBtn = <button className="button is-danger is-outlined">Delete</button>
     // }
@@ -29,7 +31,7 @@ class Post extends Component{
         <article className="media">
           <div className="media-left has-text-centered">
             <p>{ comment_count }</p>
-            <p>comments</p>
+            <p>{ comment_message }</p>
           </div>
           <div className="media-left">
             <figure className="image is-128x128">
