@@ -45,14 +45,14 @@ class Home extends Component {
         <section className="hero">
             <div className="hero-body is-vertical-center">
               <div className="container has-text-centered">
-                <h1 className="title has-text-white">
+                <h1 className="title has-text-white is-size-1">
                   Find My Fabric
                 </h1>
-                <h2>A community of fabric enthusiasts helping connect others to their dream textiles.</h2>
-                <h2 className="subtitle">
+                <h2 className="is-size-5">A community of fabric enthusiasts helping connect others to their dream textiles.</h2>
+                <div className="subtitle">
                   { signUpBtn }
                   { logInBtn }
-                </h2>
+                </div>
               </div>
             </div>
           </section>
