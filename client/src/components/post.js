@@ -11,7 +11,7 @@ class Post extends Component{
   }
 
   render(){
-    const { description, image, created_at, id, time, user_id, imagefile } = this.props.post;
+    const { description, image, created_at, id, time, user_id, imagefile, comment_count } = this.props.post;
     const {username, gravatar } = this.props.post.user; 
     let userLink = `/user/${this.props.post.user.id}`;
     let deleteBtn = null; 
@@ -27,6 +27,10 @@ class Post extends Component{
   
     return (    
         <article className="media">
+          <div className="media-left has-text-centered">
+            <p>{ comment_count }</p>
+            <p>comments</p>
+          </div>
           <div className="media-left">
             <figure className="image is-128x128">
               <Link to={`/post/${id}`}>

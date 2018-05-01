@@ -17,6 +17,7 @@ class Profile extends Component {
     this.props.is_logged_in();
 
     axios.get(`/profile/${this.props.match.params.id}`).then(resp => {
+      console.log(resp);
       this.setState({user: resp.data, posts: resp.data.posts})
     }).catch(err => {
       console.log(err)
