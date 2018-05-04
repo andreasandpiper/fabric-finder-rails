@@ -45,10 +45,10 @@ class Home extends Component {
         <section className="hero">
             <div className="hero-body is-vertical-center">
               <div className="container has-text-centered">
-                <h1 className="title has-text-white is-size-1">
+                <h1 className="title has-text-white is-size-1 is-size-1-mobile">
                   Find My Fabric
                 </h1>
-                <h2 className="is-size-5">A community of fabric enthusiasts helping connect others to their dream textiles.</h2>
+                <h2 className="is-size-5 is-size-5-mobile">A community of fabric enthusiasts helping connect others to their dream textiles.</h2>
                 <div className="subtitle">
                   { signUpBtn }
                   { logInBtn }
@@ -81,7 +81,7 @@ class Home extends Component {
         </section>
         <section className="home-tagline is-vertical-center">
           <div className="container">
-            <h1 className="has-text-white">Ever run out of fabric and online searches lead you nowhere? By creating a central source for all fabric related questions we bring our collaborative minds to help each other out. </h1>
+            <h1 className="has-text-white is-size-3 is-size-6-mobile">Ever run out of fabric and online searches lead you nowhere? By creating a central source for all fabric related questions we bring our collaborative minds to help each other out. </h1>
           </div>
         </section>
       </div>

@@ -27,38 +27,39 @@ class Post extends Component{
     //   deleteBtn = <button className="button is-danger is-outlined">Delete</button>
     // }
   
-    return (    
-        <article className="media">
-          <div className="media-left has-text-centered">
+    return (
+        <div className="columns post">
+          <div className="column is-1 has-text-centered is-vertical-center-vert-items">
             <p>{ comment_count }</p>
             <p>{ comment_message }</p>
           </div>
-          <div className="media-left">
+          <div className="column is-2 is-vertical-center">
             <figure className="image is-128x128">
               <Link to={`/post/${id}`}>
                 <img src={imagefile} alt="Image"/>
               </Link>
             </figure>
           </div>
-          <div className="media-content">
-            <div className="content">
-              <h3>
-                <Link to={`/post/${id}`}>
-                  {description}
-                </Link>
-              </h3>
-            </div>
+
+          <div className="column is-7 has-text-left">
+            <h3>
+              <Link to={`/post/${id}`}>
+                {description}
+              </Link>
+            </h3>
           </div>
-          <div className="media-right">
-            <figure className="image is-48x48 ">
-              <Link to={userLink}>{ user_image }</Link>
-            </figure>
-            <span className="linebreak"></span>
-            <Link to={userLink}>{ username }</Link>
-            <p>posted {this.props.getTime(time, created_at)}</p>
-            { deleteBtn }
+
+          <div className="column is-2 has-text-left">
+            <figure className="image is-48x48">
+                <Link to={userLink}>{ user_image }</Link>
+              </figure>
+              <span className="linebreak"></span>
+              <Link to={userLink}>{ username }</Link>
+              <p>posted {this.props.getTime(time, created_at)}</p>
+              { deleteBtn }
           </div>
-        </article>
+
+        </div>
     )
   }
 }

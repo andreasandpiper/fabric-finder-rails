@@ -26,6 +26,7 @@ group :development, :test do
   gem 'sqlite3', '1.3.13'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'figaro'
+  gem 'rspec-rails', '~> 3.7'
 end
 
 group :development do
