@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-import FontAwesomeIcon from '@fortawesome/react-fontawesome/index'
-import caretup from  '@fortawesome/fontawesome-free-solid/faCaretUp';
-import caretdown from  '@fortawesome/fontawesome-free-solid/faCaretDown';
 import axios from 'axios';
 import getTime from '../HOC/time_ago';
 
@@ -37,9 +34,9 @@ class Comment extends Component{
     let deleteBtn = null; 
     let voteBtns = (
         <div className="media-left">
-          <FontAwesomeIcon icon={caretup} />
+          <i className="fas fa-caret-up"></i>
           <span className="break"><p>{ this.props.comment.vote_count || 0 }</p></span>
-          <FontAwesomeIcon icon={caretdown} />
+          <i className="fas fa-caret-down"></i>
         </div>
     )
 
@@ -50,9 +47,9 @@ class Comment extends Component{
     if(localStorage.getItem("user_id")){
       voteBtns = (
         <div className="media-left">
-          <FontAwesomeIcon icon={caretup} className="vote" onClick={this.vote.bind(this, "upvote")} />
+          <i className="fa fa-caret-up vote" onClick={this.vote.bind(this, "upvote")}></i>
           <span className="break"><p>{ this.props.comment.vote_count || 0 }</p></span>
-          <FontAwesomeIcon icon={caretdown} className="vote" onClick={this.vote.bind(this, "downvote")}/>
+          <i className="fa fa-caret-down vote" onClick={this.vote.bind(this, "downvote")}></i>
         </div>
       )
     }

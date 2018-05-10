@@ -6,6 +6,7 @@ import './mystyles.css';
 import posts from './assets/data';
 import axios from 'axios';
 import App from './components/app';
+import 'font-awesome/css/font-awesome.min.css';
 
 axios.interceptors.response.use(function (response) {
     return response;

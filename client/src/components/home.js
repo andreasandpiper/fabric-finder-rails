@@ -2,16 +2,13 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Feed from './post_feed';
 import axios from 'axios';
-import fabricSample from '../assets/images/fabricpeice.png';
-import spool from '../assets/images/spool.jpg';
-import person from '../assets/images/person.jpg';
+
 
 class Home extends Component {
   constructor(props){
     super(props);
 
     this.state = {
-      cartoonClass: 'column',
       topPosts: []
     }
   }
@@ -20,10 +17,8 @@ class Home extends Component {
     axios.get(`/topten`).then(resp => {
       console.log(resp)
       this.setState({...this.state, topPosts: resp.data});
-      window.addEventListener('scroll', this.scrollEvent.bind(this));
     }).catch(err => {
       console.log(err)
-      window.addEventListener('scroll', this.scrollEvent.bind(this));
     })
   }
 
@@ -32,7 +27,7 @@ class Home extends Component {
   }
 
   render(){
-    const { cartoonClass, topPosts } = this.state; 
+    const { topPosts } = this.state; 
     let signUpBtn = null; 
     let logInBtn = null; 
 
@@ -56,25 +51,26 @@ class Home extends Component {
               </div>
             </div>
           </section>
-        <section className="container">
-          <h1 className="has-text-centered">How does it work?</h1>
-          <hr/>
-          <div className="columns cartoons has-text-centered">
-            <div className={ cartoonClass }>
-              <img src={ fabricSample } />
-              <p>Last peice of fabric?</p>
-            </div>
-            <div className={ cartoonClass }>
-              <img src={ spool } />
-              <p>Post and Ask a Question</p>
-            </div>
-            <div className={ cartoonClass }>
-              <img src={ person } />
-              <p>Wait for comments and vote!</p>
+        <section className="home-info">
+          <div className="container">
+            <h1 className="has-text-centered">How does it work?</h1>
+            <hr/>
+            <div className="columns cartoons has-text-centered">
+              <div className="column">
+                <i className="fa fa-cut"></i>
+                <p>Last peice of fabric?</p>
+              </div>
+              <div className="column">
+                <i className="fa fa-commenting"></i>
+                <p>Post and Ask a Question</p>
+              </div>
+              <div className="column">
+                <i className="fa fa-comments"></i>
+                <p>Wait for comments and vote!</p>
+              </div>
             </div>
           </div>
         </section>
-        <hr/>
         <section className="container has-text-centered">
           <Feed data={ topPosts }/>
           <Link to="/fabric" className="button is-primary">Check out more fabric</Link> 
