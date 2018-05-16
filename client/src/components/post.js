@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import FontAwesomeIcon from '@fortawesome/react-fontawesome/index'
-import caretup from  '@fortawesome/fontawesome-free-solid/faCaretUp';
-import caretdown from  '@fortawesome/fontawesome-free-solid/faCaretDown';
 import getTime from '../HOC/time_ago';
 
 class Post extends Component{
